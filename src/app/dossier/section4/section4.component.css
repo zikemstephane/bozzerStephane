@@ -1,0 +1,21 @@
+*{
+    background-color: midnightblue;
+}
+.grande{
+    display: flex;
+    gap: 11rem;
+    justify-content: center;
+    margin-top: 70px;
+    padding: 80px;
+    
+}
+p{
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    text-align: center;
+}
+h1{
+    color: white;
+    text-align: center;
+}

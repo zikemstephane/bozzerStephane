@@ -1,0 +1,38 @@
+*{
+    background-color: #061E5C;
+}
+nav{
+    position: relative;
+}
+a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+nav .lien{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: -4%;
+    
+}
+nav span{
+    margin: 90px;
+    padding: 15px;
+    margin-top: 2%;
+    flex-direction: column;
+}
+nav button{
+    border: 1px solid;
+    text-align: center;
+    padding: 15px;
+    margin: 0px 0px 15px;
+    color: black;
+    font-size: 20px;
+    background-color: #fff;
+    border-color: white;
+    border-radius: 0.5rem;
+    margin-left: 85%;
+    margin-top: -3%;
+}

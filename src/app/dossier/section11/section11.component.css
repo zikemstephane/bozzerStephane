@@ -1,0 +1,54 @@
+body{
+    margin: 10px;
+    height: 400px;
+}
+.sectio{
+    margin-top: 220px;
+    margin-left: 170px;
+}
+.sectio .ima{
+    height: 100px;
+    width: 200px;
+    margin-top: 100px;
+    margin-left: 172px;
+}
+.sectio .lien{
+    display: flex;
+    float: right;
+    margin-top: -90px;
+    margin-right: 175px;
+    gap: 2rem;
+    font-size: 18px;
+}
+a{
+    color: black;
+    text-decoration: none;
+}
+.ninho{
+    background-color: white;
+    height: 180px;
+    padding: 1px;
+    width: -800px;
+    margin-left: -172px;
+}
+.sectio .last{
+    margin-top: 50px;
+    font-size: 18px;
+}
+.indice{
+    border: 1px solid;
+    color: white;
+    padding: 5px 10px 0px;
+    border-radius: 0.5rem;
+    font-size: 50px;
+    text-align: center;
+    margin-left: 1400px;
+    background-color: blue;
+}
+.icone{
+float: right;
+margin-top: -35px;
+margin-right: 175px;
+gap: 3rem;
+display: flex;
+}

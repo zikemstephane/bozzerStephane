@@ -1,0 +1,77 @@
+.im1 {
+    height: 80px;
+    width: 80px;
+    border: 0px solid;
+    border-radius: 50px;
+}
+
+button {
+    color: white;
+    background-color: blue;
+    padding: 10px;
+    border: 1px solid;
+    border-radius: 1rem;
+    border-color: blue;
+}
+
+body {
+    justify-content: center;
+    background-color: #F0F3FA;
+    height: 700px;
+}
+
+.premiere {
+    justify-content: center;
+    text-align: center;
+    margin-top: 100px;
+    padding: 80px;
+}
+
+.img {
+    margin-left: 95px;
+    margin-top: -5px;
+}
+
+.izo {
+    margin-left: 95px;
+    margin-top: -80px;
+}
+
+.po {
+    margin-left: 90px;
+    margin-top: -10px;
+}
+
+.parti {
+    border: 0px solid;
+    width: 300px;
+    padding: 20px;
+    border-radius: 0.5rem;
+    background-color: #fff;
+}
+
+.seconde {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: -30px;
+}
+
+.systemer span:first-child {
+    border: 1px solid;
+    width: 300px;
+    height: 200px;
+}
+
+.rounded-rectangle {
+    width: 40px;
+    height: 15px;
+    background-color: blue;
+    border-radius: 15px;
+}
+.en{
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+    gap: 0.5rem;
+}

@@ -1,0 +1,49 @@
+body{
+    margin-top: 100px;
+    justify-content: center;
+}
+.images{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+.images .im1 img{
+    height: 250px;
+    width: 200px;
+    
+}
+.first{
+    justify-content: center;
+    text-align: center;
+}
+.first h1{
+    color: midnightblue;
+}
+.first p{
+    opacity: 0.5;
+}
+button{
+    border: 1px solid;
+    color: white;
+    border-color: blue;
+    background-color: blue;
+    padding: 5px;
+    width: 75px;
+    border-radius: 1rem;
+}
+.images .im1{
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: rgb(234, 238, 241);
+}
+.images .im1 p span{
+    margin: 10px;
+}
+.images .im1 p span:first-child{
+    color: midnightblue;
+}
+.images .im1 p span:last-child{
+    opacity: 0.7;
+}

@@ -1,0 +1,38 @@
+<body ng-app="My-App">
+    <div class="systeme">
+        <button>Features</button>
+        <h1>Appmeet Has Awesome <br> Stunning Feature</h1>
+        <p>There are many variations of passages of lorem ipsum available, but the <br> majority have suffered alteration in some form</p>
+    </div>
+    
+    <div class="ensemble" ng-controller="crtl">
+        <div class="seul">
+            <img src="coeur.PNG" alt="" >
+            <h2 ng-repeat="x in titre">Simple & Light</h2>
+            <p ng-repeat="t in para">Appmeet is a completely creative, lightweight, clean & super responsive app landing page</p>
+        </div>
+        <div class="seul">
+            <img src="carre.PNG" alt="">
+            <h2 ng-repeat="x in titre">Super Responsive</h2>
+            <p ng-repeat="t in para">Appmeet is a completely creative, lightweight, clean & super responsive app landing page</p>
+        </div>
+        <div class="seul">
+            <img src="insect.PNG" alt="">
+            <h2 ng-repeat="x in titre">Bug Free Code</h2>
+            <p ng-repeat="t in para">Appmeet is a completely creative, lightweight, clean & super responsive app landing page</p>
+        </div>
+    </div>
+
+   <!---- <script>
+        var app = angular.module('My-App', []);
+        app.controller('crtl', function($scope) {
+            $scope.image = ['l2-content-img-1.png'];
+            $scope.titre = ["Simple & Light", "Super Responsive", "Bug Free Code"];
+            $scope.para = [
+                "Appmeet is a completely creative, lightweight, clean & super responsive app landing page",
+                "Appmeet provides a seamless user experience with fast loading times.",
+                "The code is optimized for performance and is easy to customize."
+            ];
+        });
+    </script>-->
+</body>

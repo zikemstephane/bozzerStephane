@@ -1,0 +1,96 @@
+body{
+    margin-top: -7px;
+    background-color: #061E5C;
+    height: 706px;
+}
+.stephane{
+    display: flex;
+}
+.stephane span:first-child{
+    padding: 180px;
+    margin-top: -130px;
+}
+.stephane span:last-child{
+    border: 1px solid;
+    height: 200px;
+    margin-top: 280px;
+    width: 400px;
+    margin-left: -150px;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 0.5rem;
+}
+.stephane span:last-child p{
+    color: blue;
+    font-size: 18px;
+}
+.pince input{
+    height: 36px;
+    margin-top: -2px;
+    width: 280.25px;
+    border: 0px solid;
+}
+.pince button{
+    background-color: blue;
+    color: #fff;
+    padding: 10px;
+    width: 100px;
+    border: 0px solid;
+    border-radius: 0.5rem;
+    margin-top: -2px;
+}
+.pince{
+    border: 1px solid;
+    height: 32px;
+    text-align: center;
+    align-items: center;
+    padding: 7px;
+    border-color:aliceblue;
+    border-radius: 0.5rem;
+}
+.bozzer{
+    padding: 180px;
+    display: flex;
+    gap: 32.75rem;
+    margin-top: -180px;
+}
+.bozzer p span:first-child{
+    color: midnightblue;
+    font-size: 30px;
+    font-weight: bold;
+        /*background-color: #F0F3FA;*/
+}
+.bozzer p span:last-child{
+    color: blue;
+    font-size: 30px;
+    font-weight: bold;
+}
+.bozzer .but button:first-child{
+    color: white;
+    background-color: blue;
+    padding: 10px;
+    text-align: center;
+    border: 0px solid;
+    border-radius: 0.25rem;
+    width: 120px;
+    margin-top: 40px;
+    margin: 10px;
+}
+.bozzer .but button:last-child{
+    color: white;
+    background-color: midnightblue;
+    padding: 10px;
+    text-align: center;
+    border: 0px solid;
+    border-radius: 0.25rem;
+    width: 120px;
+}
+.but{
+    margin-top: 20px;
+}
+.bozzer p{
+    margin-top: -100px;
+}
+.bozzer .but{
+    margin-top: -100px;
+}

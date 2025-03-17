@@ -1,0 +1,60 @@
+*{
+    background-color: #061E5C;
+}
+.sec{
+    height: 640px;
+    display: flex;
+}
+.sec:first-child h1{
+    color: white;
+    font-weight: bold;
+    font-size: 50px;
+    font-family: 'Times New Roman', Times, serif;
+}
+.first{
+    color: white;
+    font-size: 20px;
+}
+.sec .firste{
+    position: absolute;
+    margin-top: 6%;
+    margin-left: 130px;
+}
+span:last-child{
+    margin: 20px;
+    display: flex;
+    margin-left: 880px;
+    width: 900px;
+    height: 550px;
+}
+.sec .int input{
+    margin: 10px;
+    height: 45px;
+    margin-left: -4px;
+    width: 300px;border-radius: 0.45rem;
+    background-color: white;
+    border: 0px solid;
+}
+.sec .int button{
+    margin: 10px;
+    height: 50px;
+    margin-left: -4px;
+    width: 150px;
+    color: white;
+    background-color: blue;
+    border-radius: 0.45rem;
+    font-size: 15px;
+    border: 0px solid;
+}
+.firste .tr img{
+    height: 50px;
+    width: 50px;
+    margin-left: -18px;
+    filter: hue-rotate(10deg);
+}
+.firste .tr a{
+    position: absolute;
+    margin-top: 19px;
+    color: white;
+    text-decoration: none;
+}

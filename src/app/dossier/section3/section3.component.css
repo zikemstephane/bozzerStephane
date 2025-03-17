@@ -1,0 +1,66 @@
+.premier{
+    width: 100%;
+}
+span:last-child{
+    position: absolute;
+    margin-top: -23%;
+    margin-left: 30%;
+}
+.premier .first h2{
+   margin-left: 250px; 
+   font-size: 40px;
+}
+.premier .first p{
+    margin-left: 250px;
+    opacity: 0.5; 
+ }
+ .premier .first img{
+    margin-left: 250px; 
+    width: 4%;
+    margin-top: 100px;
+ }
+ .premier .first button{
+    margin-left: 250px; 
+    padding: 13px;
+    background-color: blue;
+    color: white;
+    border: 1px solid;
+    border-radius: 0.5rem;
+ }
+ /*-----------------------------seconde partie--------------*/
+.second{
+    width: 100%;
+    margin-top: 50px;
+}
+span.xender{
+    padding: 60px;
+    margin-left: 200px;
+}
+hr{
+    margin: 40px;
+    width: 103%;
+    margin-left: -50px;
+}
+.youtube img{
+    width: 50%;
+    margin-top: 390px;
+    margin-left: -450px;
+}
+.youtube p{
+   opacity: 0.5; 
+   margin-left: -312%;
+}
+.youtube h1{
+    margin-left: -450px;
+    margin-top: 50px;
+}
+.youtube button{
+    padding: 13px;
+    background-color: blue;
+    color: white;
+    border: 1px solid;
+    border-radius: 0.5rem;
+    margin-left: -450px;
+    width: 150px;
+    margin-top: 40px;
+}

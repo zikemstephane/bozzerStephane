@@ -1,0 +1,72 @@
+*{
+    background-color: #f0f3fa;
+    ;
+    
+}
+
+.setting{
+    padding: 80px;
+    flex-direction: column;
+}
+.setting button{
+    background-color: blue;
+    color: white;
+    border-radius: 20px;
+    border-color: blue;
+    border: 1px solid;
+    padding: 5px;
+    margin-left: 49%;
+}
+.setting h1{
+    text-align: center;
+    color: midnightblue;
+}
+.setting p{
+    opacity: 0.5;
+    text-align: center;
+}
+.first{
+    margin-top: -20px;
+    border: 1px solid;
+    padding: 10px;
+    height: 300px;
+    width: 290px;
+    background-color: white;
+    border-radius: 0.5rem;
+    border-color: white;
+}
+.pro .first .pr{
+    color: midnightblue;
+    margin-left: 50px;
+    background-color: white;
+}
+.pro .first .pt{
+    opacity: 0.5;
+    margin-left: 50px;
+    background-color: white;
+}
+.pro .first p span:first-child{
+    font-weight: bold;
+    font-size: 30px;
+    margin-left: 50px;
+}
+.pro .first p span{
+    background-color: white;
+}
+.pro .first button{
+    background-color: midnightblue;
+    color: white;
+    padding: 10px;
+    width: 190px;
+    margin-left: 50px;
+}
+ul li{
+    background-color: white;
+    margin-left: 30px;
+}
+.pro{
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    height: 370px;
+}
