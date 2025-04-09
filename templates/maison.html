@@ -1,0 +1,82 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/style.css' %}">
+    <title>Créer votre Maison</title>
+</head>
+
+<body>
+    <h1>Remplissez ces informations pour créer votre maison</h1>
+    <div class="container mt-5">
+        <form action="/maison/ajouter_maison/" method="post" class="bg-light">
+            {% csrf_token %}
+            
+            <div class="mb-3">
+                <label for="couleur" class="form-label">Couleur:</label>
+                <input type="text" class="form-control" id="couleur" placeholder="Entrez la couleur" name="couleur">
+            </div>
+            <div class="mb-3">
+                <label for="adresse" class="form-label">Adresse:</label>
+                <input type="text" class="form-control" id="adresse" placeholder="Entrez l'adresse" name="adresse">
+            </div>
+            <div class="mb-3">
+                <label for="quartier" class="form-label">Quartier:</label>
+                <select class="form-select" id="quartier" name="kwat" required>
+                    <option value="" disabled selected>Sélectionnez un quartier</option>
+                    {% for quartier in course %}
+                        <option value="{{ quartier }}">{{quartier.nom_quartier}}</option>
+                    {% empty %}
+                        <option value="">Aucun quartier disponible</option>
+                    {% endfor %}
+                    <!--<option name="kwat">nkolmesseng</option>
+                    <option name="kwat">mbangong</option>
+                    <option name="kwat">Anguissa</option>
+                    <option name="kwat">nkoldongo</option>
+                    <option name="kwat">emombo</option>-->
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="superficie" class="form-label">Superficie:</label>
+                <input type="number" class="form-control" id="superficie" placeholder="Entrez la superficie" name="superficie">
+            </div>
+            <div class="mb-3">
+                <label for="type_maison" class="form-label">Type de Maison:</label>
+                <select class="form-select" id="type_maison" name="type_maison">
+                    <option value="">Choisissez un type</option>
+                    <option value="appartement">Appartement</option>
+                    <option value="maison_individuelle">Maison Individuelle</option>
+                    <option value="maison_jumelée">Maison Jumelée</option>
+                    <option value="studio">Studio</option>
+                    <option value="duplex">Duplex</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="nombre_douche" class="form-label">Nombre de Douches:</label>
+                <input type="number" class="form-control" id="nombre_douche" placeholder="Entrez le nombre de douches" name="nombre_douche">
+            </div>
+            <button type="submit" class="btn btn-primary">Envoyer</button>
+            {{ form.as_p }}
+        </form>
+    </div>
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+    {% for quartier in quartiers %}
+    <div class="quartier-info">
+        <p><span>ID:</span> <span>{{ quartier.id }}</span></p>
+        <p><span>Couleur :</span> <span>{{ quartier.coleur }}</span></p>
+        <p><span>Nom Quartier :</span> <span>{{ quartier.quartier_id }}</span></p>
+        <p><span>Ville :</span> <span>{{ quartier.adresse }}</span></p>
+        <p><span>Superficie :</span> <span>{{ quartier.superficie }}</span></p>
+        <p><span>type_maison :</span> <span>{{ quartier.type_maison }}</span></p>
+        <p><span>nombre_douche :</span> <span>{{ quartier.nombre_douche }}</span></p>
+    </div>
+    {% endfor %}
+    <a href="lister_quartiers/"><button>Afficher la liste des maison</button></a>
+</body>
+
+</html>

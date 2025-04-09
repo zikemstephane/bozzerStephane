@@ -1,0 +1,34 @@
+/* Style global */
+body {
+    background-color: #f0f0f0; /* Fond gris */
+    color: #333; /* Couleur du texte */
+}
+
+/* Style pour le conteneur */
+.container {
+    background-color: #9d1313; /* Couleur blanche pour le conteneur */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Style pour le titre */
+h1 {
+    color: #1d344a; /* Couleur du titre */
+}
+
+/* Style pour les liens */
+a {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    color: #ffffff; /* Couleur du texte des liens */
+    background-color: #071d2b; /* Couleur de fond des liens */
+    border-radius: 5px;
+    text-decoration: none; /* Supprimer le soulignement */
+    transition: background-color 0.3s;
+}
+
+a:hover {
+    background-color: #2980b9; /* Couleur de fond au survol */
+}

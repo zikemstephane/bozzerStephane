@@ -1,0 +1,91 @@
+body {
+    background-color: #f4f7fa; /* Couleur de fond douce */
+    font-family: 'Arial', sans-serif; /* Police moderne */
+}
+
+h1 {
+    text-align: center; /* Centrer le titre */
+    color: #333; /* Couleur du texte */
+    margin-top: 20px; /* Marge supérieure */
+}
+
+.container {
+    background-color: #ffffff; /* Fond du conteneur */
+    padding: 40px; /* Rembourrage autour du contenu */
+    border-radius: 8px; /* Coins arrondis */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Ombre pour profondeur */
+    max-width: 600px; /* Largeur maximale du conteneur */
+    margin: 50px auto; /* Centrer le conteneur */
+}
+
+.mb-3 {
+    margin-bottom: 20px; /* Espacement entre les champs */
+}
+
+.form-label {
+    font-weight: bold; /* Labels en gras */
+    color: #555; /* Couleur des labels */
+}
+
+.form-control, .form-select {
+    border: 1px solid #ced4da; /* Bordure des champs */
+    border-radius: 5px; /* Coins arrondis */
+    transition: border-color 0.3s; /* Transition douce pour le focus */
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #007bff; /* Bordure bleue lors du focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Ombre lors du focus */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Couleur de fond du bouton */
+    border: none; /* Pas de bordure */
+    padding: 12px 20px; /* Rembourrage interne du bouton */
+    border-radius: 5px; /* Coins arrondis du bouton */
+    color: white; /* Couleur du texte */
+    font-weight: bold; /* Texte en gras */
+    transition: background-color 0.3s; /* Transition douce pour le survol */
+    width: 100%; /* Bouton prend toute la largeur */
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Couleur lors du survol */
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px; /* Rembourrage réduit sur mobile */
+    }
+}
+
+/* Style pour le conteneur des informations du quartier */
+.quartier-info {
+    background-color: #ffffff; 
+    border-radius: 10px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+    margin: 15px 0; 
+    transition: transform 0.2s; 
+}
+
+.quartier-info:hover {
+    transform: scale(1.02); 
+}
+
+.quartier-info p {
+    margin: 10px 0; 
+    font-size: 16px; 
+    color: #333; 
+}
+
+
+.quartier-info span {
+    font-weight: bold;
+    color: #2c3e50; 
+}
+
+
+.quartier-info span:last-child {
+    color: #3498db; 
+}

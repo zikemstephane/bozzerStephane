@@ -1,0 +1,20 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page d'Accueil</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{%static 'css/index.css'%}">
+
+</head>
+<body>
+    <div class="container mt-5 text-center">
+        <h1>Bienvenue sur notre application <br> Quel action souhaitez-vous effectuer</h1>
+        <a href="{% url 'quartier' %}">Créer Quartier</a>
+        <a href="{% url 'maison' %}">Créer Maison</a>
+        {{variable}}
+    </div>
+</body>
+</html>
