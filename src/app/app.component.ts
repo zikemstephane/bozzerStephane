@@ -12,14 +12,13 @@ import { Section9Component } from './dossier/section9/section9.component';
 import { Section10Component } from './dossier/section10/section10.component';
 import { Section11Component } from './dossier/section11/section11.component';
 
-
-
 @Component({
   selector: 'app-root',
-  imports: [HeaderComponent,Section1Component,Section2Component,Section3Component,Section4Component,Section6Component,Section7Component,Section8Component,Section9Component,Section10Component,Section11Component],
+  imports: [ HeaderComponent,Section1Component,Section2Component,Section3Component,Section4Component,Section6Component,Section7Component,Section8Component,Section9Component,Section10Component,Section11Component, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
+
 export class AppComponent {
   title = 'projet-Angular'
 }
