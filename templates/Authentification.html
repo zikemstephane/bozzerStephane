@@ -1,0 +1,48 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{%static 'css/authentification.css'%}" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Connectez-vous à votre compte</h2>
+      <form method="post" action="formulaireAuthentification/">
+        {% csrf_token %}
+        <div class="mb-3 text-start">
+          <label for="username" class="form-label">Nom d'utilisateur</label>
+          <input
+            type="text"
+            class="form-control"
+            name="username"
+            name="username"
+            required
+            minlength="4"
+            maxlength="20"
+          />
+        </div>
+        <div class="mb-3 text-start">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input
+            type="password"
+            class="form-control"
+            name="password"
+            name="password"
+            required
+            minlength="4"
+            maxlength="20"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary w-100">
+          Se connecter
+        </button>
+      </form>
+      {% if message %}
+      <p style="color: red">{{ message }}</p>
+      {% endif %}
+    </div>
+  </body>
+</html>

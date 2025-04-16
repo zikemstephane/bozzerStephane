@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Modifier Catégorie</title>
+    <link rel="stylesheet" href="{% static 'css/FormCategorie.css' %}">
+</head>
+<body>
+    <h2>Modifier la catégorie</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="nom">Nom :</label>
+        <input type="text" name="nom" value="{{ categorie.Type_maison }}" required>
+
+        <label for="description">Description :</label>
+        <textarea name="description" required>{{ categorie.description }}</textarea>
+
+        <button type="submit">Modifier</button>
+        <a href="{% url 'listerCategorie' %}">Annuler</a>
+    </form>
+</body>
+</html>

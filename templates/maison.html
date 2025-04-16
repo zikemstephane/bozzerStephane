@@ -1,0 +1,48 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/maison.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="title" style="text-transform: uppercase;">Voici la liste des maisons que vous avez MR {{username}}</h1>
+    <div class="maino">
+      <table class="maison-table">
+        <thead>
+          <tr>
+            <th>Quartier</th>
+            <th>Adresse</th>
+            <th>Superficie</th>
+            <th>Catégorie</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for maison in maisons %}
+          <tr>
+            <td><span class="value">{{maison.quartier_id}}</span></td>
+            <td><span class="value">{{maison.adresse}}</span></td>
+            <td><span class="value">{{maison.superficie}} m²</span></td>
+            <td><span class="value">{{maison.type_maison_id}}</span></td>
+            <td class="button-container">
+              <button class="btn-action modifier"><a href="{% url 'modifierMaison' maison.id %}" class="btn-action modifier" style="text-decoration: none; color: white;">✏️ Modifier</a></button>
+              <button class="btn-supprimer"><a href="{% url 'supprimerMaison' maison.id %}" class="btn-action supprimer" onclick="return confirm('Voulez-vous vraiment supprimer cette maison ?');" style="text-decoration: none; color: white;">🗑️ Supprimer</a></button>
+            </td>
+          </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+      <div class="action-buttons">
+        <button class="btn-retour">
+          <a href="{%url 'retour'%}">Retour</a>
+        </button>
+        <button class="btn-retour">
+          <a href="{% url 'formMaison' %}">Créer une maison</a>
+        </button>
+      </div>
+    </div>
+  </body>
+</html>

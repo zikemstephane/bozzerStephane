@@ -1,0 +1,54 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/formQuartier.css'%}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/6/2Q4d7z5e5f5e5f5e5f5e5f5e5f5e5f5e5f" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container mt-4">
+        <h2>Formulaire de Quartier</h2>
+      
+        <form method="post" action="{% url 'quartier' %}">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label for="nom" class="form-label">Nom</label>
+            <input type="text" class="form-control" id="nom" required name="nom" name="nom">
+          </div>
+      
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" required name="description" name="description"></textarea>
+          </div>
+      
+          <div class="mb-3">
+            <label for="superficie" class="form-label">Superficie (m²)</label>
+            <input type="number" class="form-control" id="superficie" required name="superficie" name="superficie">
+          </div>
+      
+          <div class="mb-3">
+            <label for="administrateur" class="form-label">Administrateur</label>
+            <select class="form-control" id="administrateur" required name="administrateur" name="administrateur">
+              <option value="" disabled selected>-- Sélectionnez un administrateur --</option>
+              <option value="admin">admin</option>
+              <option value="stephane">stephane</option>
+              <option value="licence">licence</option>
+              <option value="zikem">zikem</option>
+              <option value="kuete">kuete</option>
+            </select>
+          </div>
+      
+          <button type="submit" class="btn btn-success w-100">
+            Enregistrer
+          </button>
+          <button type="submit" class="btn btn-success w-100">
+            <a href="{% url 'Dashbord' %}">Retour</a>
+          </button>
+    
+        </form>
+      </div>
+</body>
+</html>

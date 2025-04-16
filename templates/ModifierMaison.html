@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Maison</title>
+    <link rel="stylesheet" href="{% static 'css/FormMaison.css' %}">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Modifier une maison</h2>
+        <form method="post">
+            {% csrf_token %}
+            <label for="adresse">Adresse</label>
+            <input type="text" name="adresse" id="adresse" value="{{ maison.adresse }}" required>
+
+            <label for="superficie">Superficie</label>
+            <input type="number" name="superficie" id="superficie" value="{{ maison.superficie }}" required>
+
+            <label for="categorie">Catégorie</label>
+            <select name="categorie" id="categorie">
+                {% for cat in categories %}
+                    <option value="{{ cat.id }}" {% if cat.id == maison.type_maison.id %}selected{% endif %}>{{ cat.Type_maison }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="quartier">Quartier</label>
+            <select name="quartier" id="quartier">
+                {% for q in quartiers %}
+                    <option value="{{ q.id }}" {% if q.id == maison.quartier.id %}selected{% endif %}>{{ q.nom }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Modifier</button>
+        </form>
+        <button><a href="{%url 'listerMaison'%}">retour</a></button>
+    </div>
+</body>
+</html>

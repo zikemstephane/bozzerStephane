@@ -1,0 +1,154 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #0d1b2a;
+    color: #ffffff;
+  }
+  
+  .dashboard-container {
+    display: flex;
+    min-height: 100vh;
+  }
+  
+  /* SIDEBAR */
+  .sidebar {
+    width: 250px;
+    background-color: #1b263b;
+    padding: 2rem 1rem;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .sidebar h2 {
+    color: #ffffff;
+    margin-bottom: 2rem;
+    font-size: 1.4rem;
+  }
+  
+  .menu {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menu li {
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    background-color: transparent;
+    border-radius: 8px;
+    color: #61a5c2;
+    cursor: pointer;
+    transition: background 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .menu li a{
+    text-decoration: none;
+    color: white;
+  }
+  .menu li.active,
+  .menu li:hover {
+    background-color: #415a77;
+    color: #ffffff;
+  }
+  
+  /* MAIN CONTENT */
+  .main-content {
+    flex-grow: 1;
+    padding: 2rem;
+    background-color: #0d1b2a;
+  }
+  
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  /* CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  .card {
+    background-color: #1b263b;
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .card-icon {
+    font-size: 2.5rem;
+  }
+  
+  .location { color: #4dabf7; }
+  .house    { color: #f0932b; }
+  .people   { color: #74c0fc; }
+  .category { color: #9775fa; }
+  
+  .card-info h2 {
+    margin: 0;
+    font-size: 2rem;
+    color: #ffffff;
+  }
+  
+  .card-info p {
+    margin: 0;
+    font-size: 1rem;
+    color: #ced4da;
+  }
+  
+  .card button {
+    margin-top: auto;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    transition: color 0.3s ease-in-out;
+    animation: pulse 2s infinite;
+  }
+  .card button a {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #1b263b;
+    text-decoration: none;
+    font-weight: bold;
+    position: relative;
+    transition: color 0.3s ease-in-out;
+    animation: pulse 2s infinite;
+    border: 1px solid #61a5c2;
+    padding: 10px 20px;
+    background-color: #4dabf7;
+  }
+  
+  .card button a:hover {
+    color: #ffffff;
+  }
+  
+  @keyframes pulse {
+    0% {
+      color: #1b263b;
+      transform: scale(1);
+    }
+    50% {
+      color: #1b263b;
+      transform: scale(1.05);
+    }
+    100% {
+      color: #1b263b;
+      transform: scale(1);
+    }
+  }
+  
+  

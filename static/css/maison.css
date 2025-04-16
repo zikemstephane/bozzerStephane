@@ -1,0 +1,120 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #1e1e1e;
+  }
+
+  h1.title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #00ffc8;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(0, 255, 200, 0.5);
+  }
+
+  .maino {
+    padding: 30px;
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+  }
+
+  .maison-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #2c2c2c;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px #00000055;
+    color: white;
+    margin-top: 20px;
+  }
+
+  .maison-table th,
+  .maison-table td {
+    padding: 16px 20px;
+    text-align: left;
+    border-bottom: 1px solid #444;
+    font-size: 16px;
+  }
+
+  .maison-table tr:hover {
+    background-color: #3a3a3a;
+    transition: background-color 0.3s ease;
+  }
+
+  .maison-table th {
+    background-color: #333;
+    color: #00ffc8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .value {
+    color: #ddd;
+  }
+
+  .button-container {
+    display: flex;
+    gap: 10px;
+  }
+
+  .btn-modifier,
+  .btn-supprimer {
+    padding: 8px 15px;
+    background-color: #2d87f0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-modifier:hover,
+  .btn-supprimer:hover {
+    background-color: #1a6db7;
+    transform: translateY(-3px);
+  }
+
+  .action-buttons {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .btn-retour a {
+    text-decoration: none;
+    color: white;
+  }
+
+  .btn-retour {
+    padding: 10px 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-retour:hover {
+    background-color: #45a049;
+    transform: translateY(-3px);
+  }
+  .button-container button:first-child{
+    background-color: #2d87f0;
+  }
+  .button-container button:last-child{
+    background-color: #dc3545;
+  }
+  .button-container button:first-child:hover{
+    background-color: #dc3545;
+  }
+  .button-container button:last-child:hover{
+    background-color: #2d87f0;
+  }
+  

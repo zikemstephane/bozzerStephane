@@ -1,0 +1,43 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/quartier.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    <main class="quartier-container">
+        <h1 class="title">Liste des Quartiers que vous possédez</h1>
+      
+        <table class="table-quartiers">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Superficie (m²)</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for q in quartiers %}
+            <tr>
+              <td>{{ q.nom }}</td>
+              <td>{{ q.superficie }}</td>
+              <td>{{ q.description }}</td>
+              <td><button class="btn-action modifier"><a href="{% url 'modifierQuartier' q.id %}" class="btn-action modifier" style="text-decoration: none; color: white;">✏️ Modifier</a></button></td>
+              <td><button><a href="{% url 'supprimerQuartier' q.id %}" class="btn-action supprimer" onclick="return confirm('Voulez-vous vraiment supprimer ce quartier ?');" style="text-decoration: none; color: white;">🗑️ Supprimer</a></button></td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      
+        <div class="buttons-footer">
+          <a href="{% url 'Dashbord' %}" class="btn-footer">Retour</a>
+          <a href="{% url 'formQuartier' %}" class="btn-footer">Créer un Quartier</a>
+        </div>
+      </main>
+      
+</body>
+</html>

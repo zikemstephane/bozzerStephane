@@ -1,0 +1,43 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/FormMaison.css'%}">
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="form-container">
+      <h2>Ajouter une maison</h2>
+      <form action="{% url 'enregistrerMaison' %}"  method="post">
+        {% csrf_token %}
+        <label for="adresse">Adresse</label>
+        <input type="text" id="adresse" name="adresse" required>
+  
+        <label for="superficie">Superficie (m²)</label>
+        <input type="number" id="superficie" name="superficie" required>
+  
+        <label for="categorie">Catégorie</label>
+        <select id="categorie" name="categorie" required>
+          <option value="">-- Sélectionner une categorie--</option>
+            {% for categorie in categories %}
+                <option value="{{ categorie.Type_maison }}">{{ categorie.Type_maison }}</option>
+            {% endfor %}
+        </select>
+        <label for="categorie">Quartier</label>
+        <select name="quartier" id="">
+            <option value="" disabled selected>-- Sélectionner un quartier --</option>
+                {% for quartier in quartiers %}
+                    <option value="{{ quartier.nom }}">{{ quartier.nom }}</option>
+                {% endfor %}
+        </select>
+  
+        <button type="submit">Enregistrer</button>
+      </form>
+      <button><a href="{%url 'retour'%}">retour</a></button>
+    </div>
+  
+  </body>
+</html>

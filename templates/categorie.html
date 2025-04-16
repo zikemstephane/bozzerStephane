@@ -1,0 +1,45 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'css/categorie.css'%}">
+    <title>Document</title>
+</head>
+<body>
+    <main class="categorie-container">
+        <h1 class="title">Liste des Catégories de Maisons</h1>
+      
+        <table class="table-categories">
+            <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Nom</th>
+                  <th>Description</th>
+                  <th style="text-align:center;">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for cat in categories %}
+                <tr>
+                  <td>{{ cat.id }}</td>
+                  <td>{{ cat.Type_maison }}</td>
+                  <td>{{ cat.description }}</td>
+                  <td style="text-align:center;">
+                    <button class="btn-action modifier"><a href="{% url 'modifierCategorie' cat.id %}" class="btn-action modifier" style="text-decoration: none; color: white;">✏️ Modifier</a></button>
+                    <button class="btn-action supprimer"> <a href="{% url 'supprimerCategorie' cat.id %}" class="btn-action supprimer" onclick="return confirm('Voulez-vous vraiment supprimer cette catégorie ?');" style="text-decoration: none; color: white;">🗑️ Supprimer</a></button>
+                  </td>
+                </tr>
+                {% endfor %}
+              </tbody>
+        </table>
+      
+        <div class="buttons-footer">
+          <a href="{%url 'Dashbord'%}" class="btn-footer">Retour</a>
+          <a href="{%url 'formCategorie'%}" class="btn-footer">Créer une Catégorie</a>
+        </div>
+      </main>
+      
+</body>
+</html>
