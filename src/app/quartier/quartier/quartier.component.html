@@ -1,0 +1,28 @@
+<main class="quartier-container">
+  <h1 class="title">Liste des Quartiers que vous possédez</h1>
+
+  <table class="table-quartiers">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Superficie (m²)</th>
+        <th>Description</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let q of QUARTIERS_MOCK">
+        <td>{{ q.nom }}</td>
+        <td>{{ q.superficie }}</td>
+        <td>{{ q.description }}</td>
+        <td><button>Modifier</button></td>
+        <td><button>Supprimer</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="buttons-footer">
+    <a href="/dashboard" class="btn-footer">Retour</a>
+    <a href="/FormQuartier" class="btn-footer">Créer un Quartier</a>
+  </div>
+</main>

@@ -1,0 +1,20 @@
+<body>
+    
+
+<main class="categorie-form-container">
+    <h1 class="form-title">Créer une Nouvelle Catégorie</h1>
+    <form class="form" ngSubmit="onSubmit()" >
+      <label for="nom">Nom de la Catégorie</label>
+      <input type="text" id="nom" name="nom" ngModel="categorie.nom" required>
+  
+      <label for="description">Description</label>
+      <textarea id="description" name="description" rows="4" ngModel="categorie.description" required></textarea>
+  
+      <button type="submit">Enregistrer</button>
+    </form>
+  
+    <div class="btn-group">
+      <button><a href="/dashboard">Retour</a></button>
+    </div>
+  </main>
+</body>

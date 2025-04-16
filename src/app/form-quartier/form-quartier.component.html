@@ -1,0 +1,40 @@
+<div class="container mt-4">
+    <h2>Formulaire de Quartier</h2>
+  
+    <form>
+      <div class="mb-3">
+        <label for="nom" class="form-label">Nom</label>
+        <input type="text" class="form-control" id="nom" required name="nom" name="nom">
+      </div>
+  
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea class="form-control" id="description" required name="description" name="description"></textarea>
+      </div>
+  
+      <div class="mb-3">
+        <label for="superficie" class="form-label">Superficie (m²)</label>
+        <input type="number" class="form-control" id="superficie" required name="superficie" name="superficie">
+      </div>
+  
+      <div class="mb-3">
+        <label for="administrateur" class="form-label">Administrateur</label>
+        <select class="form-control" id="administrateur" required name="administrateur" name="administrateur">
+          <option value="" disabled selected>-- Sélectionnez un administrateur --</option>
+          <option value="admin">admin</option>
+          <option value="stephane">stephane</option>
+          <option value="licence">licence</option>
+          <option value="zikem">zikem</option>
+          <option value="kuete">kuete</option>
+        </select>
+      </div>
+  
+      <button type="submit" class="btn btn-success w-100">
+        Enregistrer
+      </button>
+      <button type="submit" class="btn btn-success w-100">
+        <a href="/dashboard">Retour</a>
+      </button>
+
+    </form>
+  </div>

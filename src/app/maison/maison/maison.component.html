@@ -1,0 +1,36 @@
+<body>
+    <h1 class="title">Voici la liste des maisons que vous avez</h1>
+    <div class="maino">
+      <table class="maison-table">
+        <thead>
+          <tr>
+            <th>Quartier</th>
+            <th>Adresse</th>
+            <th>Superficie</th>
+            <th>Catégorie</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let maison of maisonse">
+            <td><span class="value">{{maison.Quartier}}</span></td>
+            <td><span class="value">{{maison.adresse}}</span></td>
+            <td><span class="value">{{maison.superficie}} m²</span></td>
+            <td><span class="value">{{maison.categorie}}</span></td>
+            <td class="button-container">
+              <button class="btn-modifier">Modifier</button>
+              <button class="btn-supprimer">Supprimer</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="action-buttons">
+        <button class="btn-retour">
+          <a href="/dashboard">Retour</a>
+        </button>
+        <button class="btn-retour">
+          <a href="/FormMaison">Créer une maison</a>
+        </button>
+      </div>
+    </div>
+  </body>
