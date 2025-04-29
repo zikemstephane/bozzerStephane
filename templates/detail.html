@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Détail Événement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background: linear-gradient(to bottom right, #e0f7fa, #ffebee);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+
+    <div class="max-w-4xl mx-auto px-4 py-12">
+        <!-- Lien retour -->
+        <a href="{% url 'accueil' %}" class="inline-flex items-center text-gray-600 hover:text-indigo-600 transition mb-6 text-sm">
+            ← Retour à l'accueil
+        </a>
+
+        <!-- Texte d’introduction -->
+        <div class="bg-white rounded-xl p-8 shadow-lg mb-8">
+            <h1 class="text-2xl font-semibold text-indigo-800 mb-4">🎉 Découvrez les détails de votre événement</h1>
+            <p class="text-gray-600 leading-relaxed">
+                Sur cette page, vous pouvez consulter toutes les informations relatives à cet événement. <br>
+                Vous pouvez aussi vous inscrire ou vous désinscrire selon vos préférences. Assurez-vous de vérifier la date, l'heure et le lieu avant de participer !
+            </p>
+        </div>
+
+        <!-- Carte événement -->
+        <div class="bg-white rounded-3xl shadow-xl p-8 transform transition duration-300 hover:scale-105">
+            <h2 class="text-3xl font-bold text-indigo-700 mb-4">{{ event.titre }}</h2>
+            
+            <p class="text-gray-700 mb-6 leading-relaxed">{{ event.description }}</p>
+
+            <div class="text-sm text-gray-700 space-y-3 mb-8">
+                <p><span class="font-medium text-gray-900">📅 Date :</span> {{ event.date }} à {{ event.heure }}</p>
+                <p><span class="font-medium text-gray-900">📍 Lieu :</span> {{ event.lieu }}</p>
+                <p><span class="font-medium text-gray-900">👥 Max de participants :</span> {{ event.max_participants }}</p>
+                <p><span class="font-medium text-gray-900">👥 Participants inscrits :</span> {{ event.participation_set.count }}</p>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex flex-col sm:flex-row gap-4">
+
+
+                <a href="{% url 'participer' event.id %}"
+                class="inline-block px-6 py-2 bg-gradient-to-r from-green-400 to-green-600 hover:from-green-500 hover:to-green-700 text-white font-bold rounded-xl shadow-lg transform hover:scale-105 transition duration-300 ease-in-out">
+                 ✅ Participer
+             </a>
+            </div>
+
+            <!-- Alerte connexion -->
+            <div class="mt-8 text-sm italic text-yellow-700 bg-yellow-100 p-4 rounded-lg border border-yellow-300">
+                🔒 Vous devez être connecté pour participer ou vous désinscrire d’un événement.
+            </div>
+        </div>
+
+        <!-- Participants Liste -->
+        <div class="bg-white p-8 rounded-3xl shadow-xl mt-12">
+            <h3 class="text-xl font-semibold text-indigo-600 mb-4">👥 Participants inscrits</h3>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700">
+                {% with event.participation_set.all as participants %}
+                {% if participants %}
+                  <ul class="divide-y divide-gray-200">
+                    {% for participation in participants %}
+                      <li class="py-3 flex items-center justify-between">
+                        <div class="flex items-center space-x-3">
+                          <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">
+                            {{ participation.utilisateur.nom|slice:":1" }}
+                          </div>
+                          <span class="text-gray-700 font-medium">{{ participation.utilisateur.nom }}</span>
+                        </div>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% else %}
+                  <p class="text-gray-400 italic mt-4">Aucun participant inscrit pour cet événement.</p>
+                {% endif %}
+                {% endwith %}
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>
+

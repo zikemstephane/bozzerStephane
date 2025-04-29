@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer un Événement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-lg mt-10 mb-10">
+  <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Créer un Événement</h2>
+
+  <form method="POST" action="{% url 'enregistrer_evenement' %}" class="space-y-5">
+    {% csrf_token %}
+
+    <div>
+      <label class="block font-semibold mb-1">Titre de l'événement</label>
+      <input type="text" name="titre" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500" placeholder="Nom de l'événement" required>
+      <p class="text-sm text-gray-500 mt-1">Choisissez un nom clair et attractif</p>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">Description</label>
+      <textarea name="description" rows="4" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500" placeholder="Décrivez votre événement en quelques lignes" required></textarea>
+      <p class="text-sm text-gray-500 mt-1">Parlez du but, des activités, ou des invités spéciaux</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block font-semibold mb-1">Date</label>
+        <input type="date" name="date" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500" required>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Heure</label>
+        <input type="time" name="heure" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500" required>
+      </div>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">Lieu</label>
+      <input type="text" name="lieu" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500" placeholder="Ex: Salle Polyvalente, Centre Culturel..." required>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">Nombre max de participants</label>
+      <input type="number" name="max_participation" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500" placeholder="Ex: 100" required>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">Date de création</label>
+      <input type="date" name="date_creation" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-blue-500" required>
+    </div>
+
+    <div class="flex flex-col sm:flex-row justify-between gap-4 mt-6">
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition">
+        ✅ Créer l'événement
+      </button>
+      <a href="{% url 'dashbordAdmin' %}" class="text-blue-600 hover:underline text-center sm:text-left mt-2 sm:mt-0">
+        🔙 Retour au dashboard
+      </a>
+    </div>
+
+    {% for v in messages %}
+    <p class="text-center text-green-600 mt-4 font-medium">{{ v }}</p>
+    {% endfor %}
+  </form>
+</div>
+
+<script>
+  document.querySelector("form").addEventListener("submit", function(e) {
+    const confirmation = confirm("Es-tu sûr de vouloir créer cet événement ?");
+    if (!confirmation) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+</body>
+</html>

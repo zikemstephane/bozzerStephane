@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Modifier un Événement</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex items-center justify-center">
+
+<div class="w-full max-w-2xl bg-white p-8 rounded-2xl shadow-lg mt-10 mb-10">
+  <h2 class="text-2xl font-bold text-center text-orange-500 mb-6">Modifier l'Événement</h2>
+
+  <form method="POST" action="{% url 'modifier_evenement' evenement.id %}" class="space-y-5">
+    {% csrf_token %}
+
+    <div>
+      <label class="block font-semibold mb-1">Titre de l'événement</label>
+      <input type="text" name="titre" value="{{ evenement.titre }}" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-orange-500" required>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">Description</label>
+      <textarea name="description" rows="4" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-orange-500" required>{{ evenement.description }}</textarea>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <label class="block font-semibold mb-1">Date</label>
+        <input type="date" name="date" value="{{ evenement.date|date:'Y-m-d' }}" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-orange-500" required>
+      </div>
+      <div>
+        <label class="block font-semibold mb-1">Heure</label>
+        <input type="time" name="heure" value="{{ evenement.heure|time:'H:i' }}" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-orange-500" required>
+      </div>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">Lieu</label>
+      <input type="text" name="lieu" value="{{ evenement.lieu }}" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-orange-500" required>
+    </div>
+
+    <div>
+      <label class="block font-semibold mb-1">Nombre max de participants</label>
+      <input type="number" name="max_participation" value="{{ evenement.max_participation }}" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-orange-500" required>
+    </div>
+
+    <div class="flex flex-col sm:flex-row justify-between gap-4 mt-6">
+      <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded-lg transition">
+        🔄 Modifier l'événement
+      </button>
+      <a href="{% url 'dashbordAdmin' %}" class="text-orange-500 hover:underline text-center sm:text-left mt-2 sm:mt-0">
+        🔙 Retour au dashboard
+      </a>
+    </div>
+
+    {% for v in messages %}
+    <p class="text-center text-green-600 mt-4 font-medium">{{ v }}</p>
+    {% endfor %}
+  </form>
+</div>
+
+<script>
+  document.querySelector("form").addEventListener("submit", function(e) {
+    const confirmation = confirm("Confirmer la modification de l'événement ?");
+    if (!confirmation) {
+      e.preventDefault();
+    }
+  });
+</script>
+
+</body>
+</html>

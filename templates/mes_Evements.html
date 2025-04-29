@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vos Événements</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 to-blue-100 text-gray-800 font-sans">
+
+    {% block content %}
+    <div class="max-w-7xl mx-auto px-4 py-12">
+        <h2 class="text-3xl md:text-4xl font-bold text-center mb-8 text-indigo-700 uppercase">
+            Tes Événements, Mr/Mme {{ username }}
+        </h2>
+
+        <p class="text-center text-gray-600 mb-10">
+            Retrouvez ici tous les événements auxquels vous êtes inscrit. Vous pouvez consulter les détails ou vous désinscrire à tout moment.
+        </p>
+
+        {% if evenements_participes %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                {% for participation in evenements_participes %}
+                    <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transition duration-300 overflow-hidden flex flex-col justify-between transform hover:scale-105">
+                        <div class="p-6">
+                            <h3 class="text-xl font-semibold mb-4 text-indigo-700">{{ participation.titre }}</h3>
+                            <p class="text-sm text-gray-600 mb-4">
+                                <span class="font-medium">📅 Date :</span> {{ participation.date }}<br>
+                                <span class="font-medium">📍 Lieu :</span> {{ participation.lieu }}<br>
+                                <span class="font-medium">📜 Description :</span> {{ participation.description|truncatewords:100 }}
+                            </p>
+                            <p class="text-xs text-gray-400 mt-2">
+                                Cet événement est ajouté à votre liste. Pensez à vérifier les détails au fur et à mesure de la date.
+                            </p>
+                        </div>
+                        <div class="p-4 border-t flex justify-end">
+                            <a href="{% url 'desinscrire' participation.id %}" class="text-indigo-600 hover:text-indigo-800 text-sm font-medium transition duration-300 transform hover:scale-105">
+                                ❌ Se désinscrire
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center mt-12">
+                <div class="inline-block bg-yellow-100 text-yellow-800 text-sm font-medium px-6 py-4 rounded-xl shadow-lg">
+                    Vous n'êtes inscrit à aucun événement pour le moment.
+                </div>
+                <p class="text-gray-500 mt-4">
+                    Découvrez notre liste d'événements à venir et inscrivez-vous à ceux qui vous intéressent.
+                </p>
+                <div class="mt-6 text-indigo-600 font-semibold">
+                    <a href="{% url 'mesEvenements' %}" class="hover:underline">Voir les événements à venir →</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% endblock %}
+
+    <!-- Footer -->
+    <footer class="bg-indigo-700 text-white py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="text-center md:text-left mb-4 md:mb-0">
+                <p class="text-lg font-medium">&copy; 2025 Tous droits réservés</p>
+            </div>
+            <!--<div class="flex space-x-6">
+                <a href="#" class="hover:text-indigo-300">Politique de confidentialité</a>
+                <a href="#" class="hover:text-indigo-300">Termes et conditions</a>
+                <a href="#" class="hover:text-indigo-300">Contact</a>
+            </div>-->
+        </div>
+    </footer>
+
+</body>
+</html>

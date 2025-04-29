@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Liste des Participants</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(to right, #eef2f3, #8e9eab);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+  <!-- Header -->
+  <header class="bg-blue-600 text-white py-6 shadow-lg">
+    <div class="container mx-auto text-center">
+      <h1 class="text-3xl font-bold">📋 Liste des Participants par Événement</h1>
+      <p class="text-blue-100 mt-2 text-sm">Gérez efficacement vos événements et participants.</p>
+    </div>
+  </header>
+
+  <!-- Contenu -->
+  <main class="container mx-auto px-4 py-10">
+    {% for event in evenements %}
+      <div class="bg-white rounded-xl shadow-md hover:shadow-lg transition-shadow p-6 mb-8">
+        <div class="flex items-center justify-between mb-4">
+          <div>
+            <h2 class="text-2xl font-semibold text-gray-800">{{ event.titre }}</h2>
+            <p class="text-gray-500 text-sm mt-1">📅 {{ event.date }} | 🕒 {{ event.heure }} | 📍 {{ event.lieu }}</p>
+          </div>
+          <div class="text-blue-500 font-bold">
+            {{ event.participation_set.count }} participant{{ event.participation_set.count|pluralize }}
+          </div>
+        </div>
+
+        {% with event.participation_set.all as participants %}
+          {% if participants %}
+            <ul class="divide-y divide-gray-200">
+              {% for participation in participants %}
+                <li class="py-3 flex items-center justify-between">
+                  <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center font-bold">
+                      {{ participation.utilisateur.nom|slice:":1" }}
+                    </div>
+                    <span class="text-gray-700 font-medium">{{ participation.utilisateur.nom }}</span>
+                  </div>
+                  <span class="text-gray-400 text-xs">Inscrit</span>
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-gray-400 italic mt-4">Aucun participant inscrit pour cet événement.</p>
+          {% endif %}
+        {% endwith %}
+      </div>
+    {% empty %}
+      <div class="bg-white text-center py-10 rounded-lg shadow-md">
+        <h2 class="text-gray-500 text-xl">Aucun événement disponible pour le moment.</h2>
+      </div>
+    {% endfor %}
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-blue-600 text-white py-4 mt-auto">
+    <div class="container mx-auto text-center text-sm">
+      &copy; 2025 Gestion Événements - Tous droits réservés.
+    </div>
+  </footer>
+
+</body>
+</html>

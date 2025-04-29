@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Administrateur</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: linear-gradient(135deg, #6e7dff, #4c9c8f);
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+      border-radius: 1rem;
+    }
+
+    .button-hover:hover {
+      background: linear-gradient(90deg, #4c9c8f, #6e7dff);
+      transform: scale(1.1);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      color: #333;
+    }
+
+    .icon-hover:hover {
+      transform: scale(1.2);
+      color: #fff;
+      transition: all 0.3s ease;
+    }
+
+    .card-hover {
+      border: 1px solid #e0e0e0;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+    .card-hover:hover {
+      transform: scale(1.03);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Background blur effect */
+    .bg-blur {
+      background: rgba(255, 255, 255, 0.8);
+      backdrop-filter: blur(10px);
+    }
+  </style>
+</head>
+<body class="font-sans text-gray-800">
+
+<!-- Navbar -->
+<nav class="bg-indigo-600 p-4 shadow-md">
+  <div class="container mx-auto flex justify-between items-center">
+    <a class="text-white text-lg font-bold" href="#">🎯 Panel Admin</a>
+    <div class="flex space-x-6">
+      <a class="text-white hover:underline" href="#">Accueil</a>
+      <a class="text-white hover:underline" href="{% url 'afficheFORMEvent' %}">Créer Événement</a>
+      <a class="text-white hover:underline" href="{% url 'liste_participants' %}">Voir Participants</a>
+      <a class="text-white hover:underline" href="{% url 'Authentification' %}">Déconnexion</a>
+    </div>
+  </div>
+</nav>
+
+<!-- Contenu principal -->
+<div class="container mx-auto mt-10 px-4">
+  <div class="text-center mb-10">
+    <h2 class="text-3xl font-bold text-white">Dashboard Administrateur</h2>
+    <p class="text-white max-w-xl mx-auto mt-2">
+      Cette interface vous permet de visualiser les événements en cours, suivre les participations des utilisateurs et gérer vos actions administratives.
+    </p>
+  </div>
+
+  <!-- Statistiques -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+    <div class="card bg-green-500 text-white p-6 rounded-xl shadow-md transform hover:scale-105 transition duration-300">
+      <div>
+        <h5 class="font-medium">Nombre total d’événements créés</h5>
+        <h2 class="text-4xl font-bold">{{ cat }}</h2>
+      </div>
+      <i class="bi bi-calendar-event-fill text-5xl opacity-80 icon-hover"></i>
+    </div>
+    <div class="card bg-blue-500 text-white p-6 rounded-xl shadow-md transform hover:scale-105 transition duration-300">
+      <div>
+        <h5 class="font-medium">Participations enregistrées</h5>
+        <h2 class="text-4xl font-bold">{{ pat }}</h2>
+      </div>
+      <i class="bi bi-people-fill text-5xl opacity-80 icon-hover"></i>
+    </div>
+  </div>
+
+  <!-- Liste des événements -->
+  <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+    <div class="p-6 border-b border-gray-200">
+      <h5 class="section-title text-xl font-semibold text-gray-700">📋 Liste des événements en cours</h5>
+      <p class="text-sm text-gray-500 mt-1">Détails des événements organisés et des participants inscrits.</p>
+    </div>
+    <div class="p-4 overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200 text-center">
+        <thead class="bg-gray-800 text-white">
+          <tr>
+            <th class="py-3 px-4">Titre</th>
+            <th class="py-3 px-4">Date</th>
+            <th class="py-3 px-4">Heure</th>
+            <th class="py-3 px-4">Lieu</th>
+            <th class="py-3 px-4">Participants</th>
+            <th class="py-3 px-4">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="bg-white divide-y divide-gray-100 text-sm">
+          {% for event in evenements %}
+          <tr class="hover:bg-gray-50 transition duration-200">
+            <td class="py-3 px-4 font-medium">{{ event.titre }}</td>
+            <td class="py-3 px-4">{{ event.date }}</td>
+            <td class="py-3 px-4">{{ event.heure }}</td>
+            <td class="py-3 px-4">{{ event.lieu }}</td>
+            <td class="py-3 px-4">
+              {% with event.participation_set.all as participants %}
+                <span class="bg-indigo-600 text-white rounded-full px-3 py-1 text-xs">{{ participants|length }}</span>
+                <ul class="mt-2 space-y-1 text-left text-gray-600">
+                  {% for p in participants %}
+                  <li class="text-xs">{{ p.nom }}</li>
+                  {% endfor %}
+                </ul>
+              {% endwith %}
+            </td>
+            <td class="py-3 px-4">
+              <div class="flex justify-center gap-4">
+                <a href="{% url 'details_evenement' event.id %}" class="text-indigo-600 hover:text-indigo-800 transition">
+                  <i class="bi bi-eye-fill text-xl"></i> Détails
+                </a>
+                <a href="{% url 'modifier_evenement' event.id %} " class="text-yellow-600 hover:text-yellow-800 transition">
+                  <i class="bi bi-pencil-fill text-xl"></i> Modifier
+                </a>
+                <a href="{% url 'event_delete' event.id %}" class="text-red-600 hover:text-red-800 transition">
+                  <i class="bi bi-trash-fill text-xl"></i> Supprimer
+                </a>
+              </div>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="6" class="py-6 text-gray-400 italic">Aucun événement n’est enregistré pour l’instant.</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-indigo-700 text-white py-6 mt-12 bg-blur">
+  <div class="container mx-auto flex justify-between items-center px-4">
+    <div class="text-center md:text-left mb-4 md:mb-0">
+      <p class="text-lg font-medium">&copy; 2025 Tous droits réservés</p>
+    </div>
+    <div class="flex space-x-6">
+      <a href="#" class="hover:text-indigo-300">Politique de confidentialité</a>
+      <a href="#" class="hover:text-indigo-300">Termes et conditions</a>
+      <a href="#" class="hover:text-indigo-300">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</body>
+<p>
+
+</p>
+</html>

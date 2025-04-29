@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Événements à venir</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(to bottom right, #f0f4f8, #d9e2ec);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col text-gray-800 font-sans">
+
+<!-- Header -->
+<header class="bg-indigo-600 py-6 shadow-lg">
+  <div class="container mx-auto text-center">
+    <h1 class="text-3xl md:text-5xl font-bold text-white mb-2" style="text-transform: capitalize;">
+      🎉 Bienvenue Mr/Mme {{ username }}
+    </h1>
+    <p class="text-indigo-200 text-lg">Découvrez les prochains événements et ne manquez aucune opportunité de partage et d'apprentissage !</p>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="container mx-auto px-4 py-12">
+  <div class="text-center mb-12">
+    <h2 class="text-2xl md:text-4xl font-bold text-indigo-700 mb-4">🚀 Événements à venir</h2>
+    <p class="text-gray-600 max-w-2xl mx-auto">
+      Inscrivez-vous aux événements qui vous passionnent. 
+      Chaque opportunité est une chance de rencontrer, apprendre, et évoluer. <br> 
+      Cliquez sur "Voir Détail" pour en savoir plus et réserver votre place !
+    </p>
+  </div>
+
+  <div class="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    {% for event in evenements %}
+    <div class="bg-white rounded-3xl shadow-xl hover:shadow-2xl transform hover:scale-105 transition duration-300 p-8 flex flex-col justify-between">
+      <div>
+        <h3 class="text-2xl font-semibold mb-3 text-indigo-600">{{ event.titre }}</h3>
+        <p class="text-gray-700 mb-5 text-sm leading-relaxed">
+          {{ event.description|truncatechars:120 }}
+        </p>
+        <div class="text-gray-600 text-sm space-y-1 mb-6">
+          <p><span class="font-semibold">📅 Date :</span> {{ event.date }} à {{ event.heure }}</p>
+          <p><span class="font-semibold">📍 Lieu :</span> {{ event.lieu }}</p>
+        </div>
+        <p class="text-xs text-gray-400 italic">
+          🔔 N'oubliez pas de noter cet événement dans votre agenda personnel !
+        </p>
+      </div>
+      <div class="mt-6">
+        <a href="{% url 'detail_evenement' event.id %}" class="block text-center bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-lg transition">
+          Voir Détail
+        </a>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-span-full text-center">
+      <h3 class="text-2xl font-semibold text-gray-500 mb-4">😔 Aucun événement disponible actuellement.</h3>
+      <p class="text-gray-400">Revenez bientôt pour découvrir de nouvelles opportunités enrichissantes !</p>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="mt-16 text-center">
+    <p class="mb-3 text-gray-600">Déjà inscrit(e) à un ou plusieurs événements ?</p>
+    <a href="{% url 'mesEvenements' %}" class="text-indigo-600 hover:text-indigo-800 text-lg font-bold underline">
+      👉 Accéder à mes événements
+    </a>
+  </div>
+
+  {% if messages %}
+    <div class="mt-8">
+      {% for message in messages %}
+        <div class="mb-4 px-6 py-3 rounded-lg shadow {{ message.tags }} bg-green-100 text-green-700">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</main>
+
+<!-- Footer -->
+<footer class="bg-indigo-600 mt-auto text-white py-6">
+  <div class="container mx-auto text-center text-sm">
+    © 2025 Gestion Événements. Conçu pour vous accompagner dans toutes vos aventures événementielles ✨
+  </div>
+</footer>
+
+</body>
+</html>
