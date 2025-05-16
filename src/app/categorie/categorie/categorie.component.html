@@ -1,20 +1,41 @@
 <body>
-    
+  <main class="categorie-form-container">
+    <div class="form-header">
+      <h1 class="form-title">
+        <i class="fas fa-folder-plus"></i> Créer une Nouvelle Catégorie
+      </h1>
+      <p class="form-subtitle">Remplissez les détails pour créer une nouvelle catégorie</p>
+    </div>
 
-<main class="categorie-form-container">
-    <h1 class="form-title">Créer une Nouvelle Catégorie</h1>
-    <form class="form" ngSubmit="onSubmit()" >
-      <label for="nom">Nom de la Catégorie</label>
-      <input type="text" id="nom" name="nom" ngModel="categorie.nom" required>
-  
-      <label for="description">Description</label>
-      <textarea id="description" name="description" rows="4" ngModel="categorie.description" required></textarea>
-  
-      <button type="submit">Enregistrer</button>
+    <form class="form" ngSubmit="onSubmit()">
+      <div class="input-group">
+        <label for="nom">
+          <i class="fas fa-tag"></i> Nom de la Catégorie
+        </label>
+        <input type="text" id="nom" name="nom" ngModel="categorie.nom" required placeholder="Ex: Électronique">
+        <small class="input-hint">Maximum 50 caractères</small>
+      </div>
+
+      <div class="input-group">
+        <label for="description">
+          <i class="fas fa-align-left"></i> Description
+        </label>
+        <textarea id="description" name="description" rows="4" ngModel="categorie.description" required placeholder="Décrivez cette catégorie..."></textarea>
+        <small class="input-hint">Décrivez en quelques mots cette catégorie</small>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <i class="fas fa-save"></i> Enregistrer
+      </button>
     </form>
-  
+
     <div class="btn-group">
-      <button><a href="/dashboard">Retour</a></button>
+      <button class="back-btn">
+        <a href="/dashboard"><i class="fas fa-arrow-left"></i> Retour au tableau de bord</a>
+      </button>
     </div>
   </main>
+
+  <!-- Lien vers Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </body>

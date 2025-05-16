@@ -4,8 +4,9 @@ import { Component,OnInit } from '@angular/core';
   selector: 'app-dashbord',
   imports: [],
   templateUrl: './dashbord.component.html',
-  styleUrl: './dashbord.component.css'
+  styleUrls: ['./dashbord.component.css']  // ✅ avec un "s" et sous forme de tableau
 })
+
 export class DashbordComponent implements OnInit{
   gestionnaire = {
     nom: 'Mamadou Traoré',

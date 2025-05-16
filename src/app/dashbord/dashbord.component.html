@@ -1,63 +1,177 @@
 <body>
   <div class="dashboard-container">
     <aside class="sidebar">
-      <h2>Tableau de bord</h2>
+      <div class="sidebar-header">
+        <h2>Gestion Urbaine</h2>
+        <p class="sidebar-subtitle">Administration des quartiers</p>
+      </div>
       <ul class="menu">
-        <li class="active"><i class="icon">📋</i> Tableau de bord</li>
-        <li>
-          <a href="/FormQuartier"><i class="icon">➕</i> Créer Quartier</a>
+        <li class="active">
+          <i class="fas fa-chart-pie"></i>
+          <span>Tableau de bord</span>
         </li>
         <li>
-          <a href="/FormMaison"><i class="icon">🏠</i> Créer Maison</a>
+          <a href="/FormQuartier">
+            <i class="fas fa-map-marked-alt"></i>
+            <span>Créer Quartier</span>
+          </a>
         </li>
         <li>
-          <a href="/categorie"><i class="icon">🔲</i> Créer Catégorie</a>
+          <a href="/FormMaison">
+            <i class="fas fa-home"></i>
+            <span>Créer Maison</span>
+          </a>
+        </li>
+        <li>
+          <a href="/categorie">
+            <i class="fas fa-layer-group"></i>
+            <span>Créer Catégorie</span>
+          </a>
+        </li>
+        <li>
+          <a href="/rapports">
+            <i class="fas fa-file-alt"></i>
+            <span>Rapports</span>
+          </a>
         </li>
       </ul>
+      
+      <div class="sidebar-footer">
+        <div class="user-profile">
+          <i class="fas fa-user-circle"></i>
+          <span>Administrateur</span>
+        </div>
+      </div>
     </aside>
 
     <main class="main-content">
-      <h1 class="title">TABLEAU DE BORD DE GESTION DES QUARTIERS</h1>
+      <div class="header-content">
+        <h1 class="title">
+          <i class="fas fa-city"></i> TABLEAU DE BORD DE GESTION DES QUARTIERS
+        </h1>
+        <div class="search-bar">
+          <input type="text" placeholder="Rechercher un quartier...">
+          <button><i class="fas fa-search"></i></button>
+        </div>
+      </div>
 
-      <div class="cards">
-        <div class="card">
-          <i class="card-icon location">📍</i>
-          <div class="card-info">
-            <h2>12</h2>
-            <p>Quartiers</p>
+      <div class="stats-overview">
+        <div class="stats-card">
+          <div class="stats-icon">
+            <i class="fas fa-map-marked-alt"></i>
           </div>
-          <button>
-            <a href="/quatier">Voir plus <img src="voirPlus.png" height="20px"></a>
-          </button>
+          <div class="stats-info">
+            <h3>Quartiers</h3>
+            <p class="stats-value">12</p>
+            <p class="stats-label">enregistrés</p>
+          </div>
+          <a href="/quatier" class="stats-link">
+            Voir détails <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
-        <div class="card">
-          <i class="card-icon house">🏠</i>
-          <div class="card-info">
-            <h2>350</h2>
-            <p>Maisons</p>
+        
+        <div class="stats-card">
+          <div class="stats-icon">
+            <i class="fas fa-home"></i>
           </div>
-          <button>
-            <a href="/maison">Voir plus <img src="voirPlus.png" height="20px"></a>
-          </button>
+          <div class="stats-info">
+            <h3>Maisons</h3>
+            <p class="stats-value">350</p>
+            <p class="stats-label">enregistrées</p>
+          </div>
+          <a href="/maison" class="stats-link">
+            Voir détails <i class="fas fa-arrow-right"></i>
+          </a>
         </div>
-        <div class="card">
-          <i class="card-icon people">👥</i>
-          <div class="card-info">
-            <h2>8,250</h2>
-            <p>Population</p>
+        
+        <div class="stats-card">
+          <div class="stats-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="stats-info">
+            <h3>Population</h3>
+            <p class="stats-value">8 250</p>
+            <p class="stats-label">habitants</p>
           </div>
         </div>
-        <div class="card">
-          <i class="card-icon category">🔲</i>
-          <div class="card-info">
-            <h2>25</h2>
-            <p>Catégories</p>
+        
+        <div class="stats-card">
+          <div class="stats-icon">
+            <i class="fas fa-chart-line"></i>
           </div>
-          <button>
-            <a href="/FormCategorie">Voir plus <img src="voirPlus.png" height="20px"></a>
-          </button>
+          <div class="stats-info">
+            <h3>categories</h3>
+            <p class="stats-value">10</p>
+            <p class="stats-label">ce trimestre</p>
+          </div>
+          <a href="/FormCategorie" class="stats-link">
+            Voir détails <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <div class="content-grid">
+        <div class="recent-activity">
+          <h2 class="section-title">
+            <i class="fas fa-history"></i> Activité Récente
+          </h2>
+          <div class="activity-list">
+            <div class="activity-item new">
+              <div class="activity-icon">
+                <i class="fas fa-plus-circle"></i>
+              </div>
+              <div class="activity-details">
+                <p>Nouveau quartier "Les Jardins" ajouté</p>
+                <span>Il y a 2 heures</span>
+              </div>
+            </div>
+            
+            <div class="activity-item update">
+              <div class="activity-icon">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="activity-details">
+                <p>3 nouvelles maisons enregistrées dans "Belle Vue"</p>
+                <span>Aujourd'hui, 10:45</span>
+              </div>
+            </div>
+            
+            <div class="activity-item report">
+              <div class="activity-icon">
+                <i class="fas fa-chart-bar"></i>
+              </div>
+              <div class="activity-details">
+                <p>Rapport démographique mis à jour</p>
+                <span>Hier, 18:30</span>
+              </div>
+            </div>
+            
+            <div class="activity-item maintenance">
+              <div class="activity-icon">
+                <i class="fas fa-tools"></i>
+              </div>
+              <div class="activity-details">
+                <p>Maintenance programmée pour le secteur Nord</p>
+                <span>15 mai 2023</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="quartier-map">
+          <h2 class="section-title">
+            <i class="fas fa-map"></i> Carte des Quartiers
+          </h2>
+          <div class="map-placeholder">
+            <i class="fas fa-map-marked-alt"></i>
+            <p>Carte interactive des quartiers</p>
+            <button class="view-map-btn">Ouvrir la carte</button>
+          </div>
         </div>
       </div>
     </main>
   </div>
+
+  <!-- Lien vers Font Awesome pour les icônes -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </body>

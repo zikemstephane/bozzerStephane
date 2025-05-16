@@ -1,25 +1,30 @@
 <body>
+  <div class="form-container">
+    <h2><i class="fas fa-home"></i> Ajouter une maison</h2>
+    <form id="quartierForm">
+      <div class="input-group">
+        <label for="adresse"><i class="fas fa-map-marker-alt"></i> Adresse</label>
+        <input type="text" id="adresse" name="adresse" placeholder="Ex : 12 Rue des Lilas" required>
+      </div>
 
-    <div class="form-container">
-      <h2>Ajouter une maison</h2>
-      <form id="quartierForm">
-        <label for="adresse">Adresse</label>
-        <input type="text" id="adresse" name="adresse" required>
-  
-        <label for="superficie">Superficie (m²)</label>
-        <input type="number" id="superficie" name="superficie" required>
-  
-        <label for="categorie">Catégorie</label>
+      <div class="input-group">
+        <label for="superficie"><i class="fas fa-ruler-combined"></i> Superficie (m²)</label>
+        <input type="number" id="superficie" name="superficie" placeholder="Ex : 120" required>
+      </div>
+
+      <div class="input-group">
+        <label for="categorie"><i class="fas fa-layer-group"></i> Catégorie</label>
         <select id="categorie" name="categorie" required>
           <option value="">-- Sélectionner --</option>
           <option value="résidentiel">Résidentiel</option>
           <option value="commercial">Commercial</option>
           <option value="industriel">Industriel</option>
         </select>
-  
-        <button type="submit">Enregistrer</button>
-      </form>
-      <button><a href="/dashboard">retour</a></button>
-    </div>
-  
-  </body>
+      </div>
+
+      <button type="submit"><i class="fas fa-save"></i> Enregistrer</button>
+    </form>
+
+    <a href="/dashboard" class="btn-retour"><i class="fas fa-arrow-left"></i> Retour au tableau de bord</a>
+  </div>
+</body>

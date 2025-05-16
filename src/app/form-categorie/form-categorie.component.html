@@ -1,31 +1,30 @@
 <main class="categorie-container">
-    <h1 class="title">Liste des Catégories de Maisons</h1>
-  
-    <table class="table-categories">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nom</th>
-          <th>Description</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let cat of CATEGORIES_MAISON_MOCK">
-          <td>{{ cat.id }}</td>
-          <td>{{ cat.nom }}</td>
-          <td>{{ cat.description }}</td>
-          <td>
-            <button class="btn-action modifier">Modifier</button>
-            <button class="btn-action supprimer">Supprimer</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <div class="buttons-footer">
-      <a href="/dashboard" class="btn-footer">Retour</a>
-      <a href="/categorie" class="btn-footer">Créer une Catégorie</a>
-    </div>
-  </main>
-  
+  <h1 class="title"><i class="fas fa-list"></i> Liste des Catégories de Maisons</h1>
+
+  <table class="table-categories">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom</th>
+        <th>Description</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cat of CATEGORIES_MAISON_MOCK">
+        <td>{{ cat.id }}</td>
+        <td>{{ cat.nom }}</td>
+        <td>{{ cat.description }}</td>
+        <td>
+          <button class="btn-action modifier"><i class="fas fa-edit"></i> Modifier</button>
+          <button class="btn-action supprimer"><i class="fas fa-trash-alt"></i> Supprimer</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="buttons-footer">
+    <a href="/dashboard" class="btn-footer"><i class="fas fa-arrow-left"></i> Retour</a>
+    <a href="/categorie" class="btn-footer"><i class="fas fa-plus"></i> Créer une Catégorie</a>
+  </div>
+</main>
