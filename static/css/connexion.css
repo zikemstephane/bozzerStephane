@@ -1,0 +1,116 @@
+body {
+    background: linear-gradient(120deg, #3498db, #8e44ad);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 40px 30px;
+    border-radius: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2c3e50;
+    font-size: 24px;
+}
+
+.error-message {
+    background-color: #ffcccc;
+    color: #c0392b;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group i {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    border: 1px solid #dcdde1;
+    border-radius: 30px;
+    font-size: 15px;
+    transition: 0.3s;
+    outline: none;
+}
+
+.input-group input:focus {
+    border-color: #8e44ad;
+    box-shadow: 0 0 5px rgba(142, 68, 173, 0.4);
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(to right, #8e44ad, #3498db);
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn:hover {
+    background: linear-gradient(to right, #732d91, #2471a3);
+}
+
+.signup-link {
+    display: block;
+    text-align: center;
+    margin-top: 25px;
+    color: #8e44ad;
+    font-size: 15px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.signup-link i {
+    margin-right: 6px;
+}
+
+.signup-link:hover {
+    color: #6c3483;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 480px) {
+    .form-container {
+        padding: 30px 20px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}

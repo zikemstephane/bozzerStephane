@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogÉtude - Détails du logement</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .btn-primary {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+        }
+        
+        .property-card {
+            transition: transform 0.3s ease;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .image-gallery {
+            height: 400px;
+        }
+        
+        @media (max-width: 768px) {
+            .image-gallery {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex items-center justify-between">
+                <div class="flex items-center space-x-8">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">
+                        <span class="text-orange-500">Log</span>Étude
+                    </a>
+                    <div class="hidden md:flex space-x-6">
+                        <a href="index.html" class="hover:text-orange-500 transition">Accueil</a>
+                        <a href="annonces.html" class="hover:text-orange-500 transition">Annonces</a>
+                        <a href="{%url 'apropos'%}" class="hover:text-orange-500 transition">À propos</a>
+                        <a href="contact.html" class="hover:text-orange-500 transition">Contact</a>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{%url 'index'%}" class="hidden md:block px-4 py-2 rounded-md bg-blue-600 text-white hover:bg-blue-700 transition">Connexion</a>
+                    <a href="{%url 'register'%}" class="hidden md:block px-4 py-2 rounded-md bg-orange-500 text-white hover:bg-orange-600 transition">Inscription</a>
+                    <button class="md:hidden text-gray-700">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Property Gallery -->
+    <div class="container mx-auto px-4 py-6">
+        <div class="image-gallery relative rounded-xl overflow-hidden shadow-lg">
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-orange-500/20 z-10"></div>
+            
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    {% if premiere_image %}
+<img src="{{ premiere_image.image.url }}" alt="Image de {{ comme.titre }}" class="w-full h-full object-cover rounded-lg shadow-md">
+    {% else %}
+        <div class="w-full h-48 bg-gray-100 flex items-center justify-center text-gray-500 rounded-lg">
+            Image manquante
+        </div>
+    {% endif %}
+</div>
+
+
+        
+           
+            <div class="absolute bottom-0 left-0 right-0 z-20 p-4 flex justify-start">
+                <span class="px-3 py-1 bg-white/90 rounded-full text-orange-500 font-medium text-sm">5 photos</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Property Details -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Left Column -->
+            <div class="lg:w-2/3">
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                        <div>
+                            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">{{comme.titre}}</h1>
+                            <p class="text-blue-600 mt-1">
+                                <i class="fas fa-map-marker-alt mr-1"></i> Rennes, Campus Villejean
+                            </p>
+                        </div>
+                        <div class="mt-4 md:mt-0">
+                            <span class="text-3xl font-bold text-orange-500">{{comme.prix}}€/mois</span>
+                            <span class="text-gray-500 text-sm block">Charges comprises</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-b border-gray-200 py-6 my-6">
+                        <div class="flex flex-wrap gap-4">
+                            <div class="flex items-center bg-blue-50 px-3 py-2 rounded-full">
+                                <i class="fas fa-ruler-combined text-blue-600 mr-1"></i>
+                                <span class="text-sm">{{comme.surface}}m²</span>
+                            </div>
+                            <div class="flex items-center bg-blue-50 px-3 py-2 rounded-full">
+                                <i class="fas fa-home text-blue-600 mr-1"></i>
+                                <span class="text-sm">{{comme.type}}</span>
+                            </div>
+                            <div class="flex items-center bg-blue-50 px-3 py-2 rounded-full">
+                                <i class="fas fa-bed text-blue-600 mr-1"></i>
+                                {% if comme.meublement %}
+                                <span class="text-sm">Meublé</span>
+                                {% else %}
+                                <span class="text-sm">Non Meublé</span>
+                                {% endif %}
+                            </div>
+                            <div class="flex items-center bg-blue-50 px-3 py-2 rounded-full">
+                                <i class="fas fa-wifi text-blue-600 mr-1"></i>
+                                <span class="text-sm">Internet inclus</span>
+                            </div>
+                            <div class="flex items-center bg-blue-50 px-3 py-2 rounded-full">
+                                <i class="fas fa-bus text-blue-600 mr-1"></i>
+                                <span class="text-sm">Proche transports</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">Description</h2>
+                        <p class="text-gray-700 leading-relaxed">
+                            {{comme.description}}<br><br>
+                            
+                            <br><br>
+                            
+                            Le logement comprend :
+                            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+                                <li>Une pièce principale avec coin couchage (lit 140x190) et bureau</li>
+                                <li>Une kitchenette équipée (réfrigérateur, plaques de cuisson, micro-ondes)</li>
+                                <li>Une salle de bain privative avec douche et WC</li>
+                                <li>Un espace rangement intégré</li>
+                                <li>Accès WiFi haut débit inclus</li>
+                            </ul>
+                            
+                            <br>
+                            
+                            Le bâtiment dispose d'une laverie commune et d'un local à vélos sécurisé. 
+                            Commerces et services à proximité immédiate (supermarché, boulangerie, pharmacie).
+                        </p>
+                    </div>
+                    
+                    <div class="mb-8">
+                        <h2 class="text-xl font-bold text-gray-800 mb-4">Équipements</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-700">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Lit et linge de lit fourni</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Bureau et chaise</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Kitchenette équipée</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Chauffage électrique</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Internet WiFi</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                                <span>Eau chaude incluse</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="w-full md:w-auto px-6 py-3 bg-orange-500 text-white font-medium rounded-lg btn-primary hover:bg-orange-600">
+                        <i class="fas fa-envelope mr-2"></i> Contacter le propriétaire
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Right Column -->
+            <div class="lg:w-1/3">
+                <div class="bg-white rounded-xl shadow-md p-6 sticky top-4">
+                    <h2 class="text-xl font-bold text-gray-800 mb-4">Propriétaire</h2>
+                    <div class="flex items-center mb-4">
+                        <div class="w-16 h-16 rounded-full bg-gray-200 overflow-hidden mr-3">
+                            <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Propriétaire" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <p class="font-medium" style="text-transform: uppercase;">{{proprietaire}}</p>
+                            <p class="text-sm text-gray-600">Membre depuis 2019</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-gray-700 text-sm mb-6">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400 mr-2"></i>
+                            <span>4.8/5 (12 avis)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-clock text-blue-600 mr-2"></i>
+                            <span>Réponse sous 24h en moyenne</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                            <span>Identité vérifiée</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 pt-4">
+                        <h3 class="font-medium mb-3">Disponibilité</h3>
+                        <p class="text-sm text-gray-700 mb-4">À partir du 1er septembre 2023</p>
+                        <button class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="far fa-calendar-alt mr-2"></i> Faire une demande de visite
+                        </button>
+                    </div>
+                    
+                    <div class="border-t border-gray-200 pt-4 mt-4">
+                        <h3 class="font-medium mb-3">Localisation</h3>
+                        <div class="h-40 rounded-lg overflow-hidden mb-3">
+                            <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.1156,-1.6383&zoom=15&size=400x160&markers=color:red%7C48.1156,-1.6383&key=YOUR_API_KEY" 
+                                 alt="Localisation" class="w-full h-full object-cover">
+                        </div>
+                        <p class="text-sm text-gray-700">
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-1"></i> 
+                            15 Rue des Arts, 35000 Rennes
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Similar Properties -->
+        <div class="mt-16">
+    <h2 class="text-2xl font-bold text-gray-800 mb-6">Logements similaires</h2>
+
+
+    {% if toute %}
+        {% if toute|length > 0 %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for tout in toute %}
+            <div class="property-card bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                <div class="h-48 overflow-hidden">
+                    {% if tout.premiere_image %}
+                    <img src="{{ tout.premiere_image.image.url }}" alt="Logement étudiant" class="w-full h-full object-cover">
+                    {% else %}
+                    <div class="w-full h-full bg-gray-200 flex items-center justify-center text-gray-500">Pas d'image</div>
+                    {% endif %}
+                </div>
+                <div class="p-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h3 class="font-bold text-lg">{{ tout.titre }}</h3>
+                            <p class="text-blue-600 text-sm">
+                                <i class="fas fa-map-marker-alt mr-1"></i> Rennes, Centre
+                            </p>
+                        </div>
+                        <span class="font-bold text-orange-500">{{ tout.prix }}€/mois</span>
+                    </div>
+                    <div class="flex items-center mt-4 text-sm text-gray-600 space-x-4">
+                        <span><i class="fas fa-ruler-combined mr-1"></i> {{ tout.surface }}m²</span>
+                        {% if tout.meublement %}
+                        <span><i class="fas fa-bed mr-1"></i> Meublé</span>
+                        {% else %}
+                        <span><i class="fas fa-bed mr-1"></i> Non Meublé</span>
+                        {% endif %}
+                        <span><i class="fas fa-wifi mr-1"></i>Wi-Fi</span>
+                    </div>
+                    <a href="{% url 'voir_annonces' tout.id %}">
+                        <button class="mt-4 w-full py-2 text-sm bg-blue-600 text-white rounded-md hover:bg-blue-700 transition">
+                            Voir l'annonce
+                        </button>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="flex flex-col items-center justify-center p-10 bg-yellow-50 rounded-lg border border-yellow-300 shadow-md animate-pulse">
+            <i class="fas fa-exclamation-triangle text-yellow-500 text-4xl mb-4"></i>
+            <h3 class="text-xl font-semibold text-yellow-700 mb-2">Pas de logement similaire pour le moment</h3>
+            <p class="text-gray-600 text-center max-w-md">
+                Nous n'avons trouvé aucun logement correspondant à cette annonce.<br>
+                N'hésitez pas à <a href="{% url 'dashbordsEtu' %}" class="text-blue-600 font-semibold hover:underline">explorer d'autres offres</a> ou revenir plus tard. 
+                De nouveaux logements sont ajoutés régulièrement !
+            </p>
+        </div>
+        {% endif %}
+    {% else %}
+    <div class="flex flex-col items-center justify-center p-10 bg-yellow-50 rounded-lg border border-yellow-300 shadow-md animate-pulse">
+        <i class="fas fa-exclamation-triangle text-yellow-500 text-4xl mb-4"></i>
+        <h3 class="text-xl font-semibold text-yellow-700 mb-2">Pas de logement similaire pour le moment</h3>
+        <p class="text-gray-600 text-center max-w-md">
+            Nous n'avons trouvé aucun logement correspondant à cette annonce.<br>
+            N'hésitez pas à <a href="{% url 'dashbordsEtu' %}" class="text-blue-600 font-semibold hover:underline">explorer d'autres offres</a> ou revenir plus tard. 
+            De nouveaux logements sont ajoutés régulièrement !
+        </p>
+    </div>
+    {% endif %}
+</div>
+
+    </main>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">
+                        <span class="text-orange-500">Log</span>Étude
+                    </h3>
+                    <p class="text-gray-400">
+                        La plateforme de référence pour trouver un logement étudiant en France.
+                    </p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram text-lg"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Liens utiles</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Accueil</a></li>
+                        <li><a href="#" class="hover:text-white transition">Annonces</a></li>
+                        <li><a href="#" class="hover:text-white transition">Comment ça marche</a></li>
+                        <li><a href="#" class="hover:text-white transition">FAQ</a></li>
+                        <li><a href="#" class="hover:text-white transition">Conditions générales</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Assistance</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#" class="hover:text-white transition">Centre d'aide</a></li>
+                        <li><a href="#" class="hover:text-white transition">Nous contacter</a></li>
+                        <li><a href="#" class="hover:text-white transition">Confidentialité</a></li>
+                        <li><a href="#" class="hover:text-white transition">Sécurité</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold text-lg mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">
+                        Abonnez-vous pour recevoir les meilleures offres en avant-première.
+                    </p>
+                    <form class="flex">
+                        <input type="email" placeholder="Votre email" class="px-4 py-2 rounded-l-md bg-gray-700 text-white focus:outline-none w-full">
+                        <button class="px-4 py-2 bg-orange-500 text-white rounded-r-md hover:bg-orange-600 transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 LogÉtude. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple image gallery functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // You would implement actual image gallery logic here
+            console.log('Page loaded - image gallery logic would go here');
+            
+            // Example: Contact button clicked
+            const contactBtn = document.querySelector('.btn-primary');
+            if(contactBtn) {
+                contactBtn.addEventListener('click', function() {
+                    alert('Formulaire de contact à implémenter');
+                });
+            }
+        });
+    </script>
+</body>
+</html>

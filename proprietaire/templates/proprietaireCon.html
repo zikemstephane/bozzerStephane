@@ -1,0 +1,57 @@
+{% load static %}
+{% load form_tags %}
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription Propriétaire</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+
+<div class="bg-white p-8 rounded-2xl shadow-lg w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Rejoignez notre plateforme</h2>
+    <p class="text-sm text-center text-gray-600 mb-4">Créez un compte pour gérer et retrouver facilement vos chambres en ligne.</p>
+
+    <form method="POST" class="space-y-5">
+        {% csrf_token %}
+        
+        <div>
+            <label class="block text-gray-700 mb-1" for="id_nom"><i class="fas fa-user mr-2"></i>Nom complet</label>
+            {{ form.nom|add_class:"w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" }}
+        </div>
+
+        <div>
+            <label class="block text-gray-700 mb-1" for="id_email"><i class="fas fa-envelope mr-2"></i>Adresse e-mail</label>
+            {{ form.email|add_class:"w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" }}
+            <small class="text-gray-500">Recevez des infos sur vos chambres directement dans votre boîte mail.</small>
+        </div>
+
+        <div>
+            <label class="block text-gray-700 mb-1" for="id_mot_de_passe"><i class="fas fa-lock mr-2"></i>Mot de passe sécurisé</label>
+            {{ form.mot_de_passe|add_class:"w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" }}
+            <small class="text-gray-500">Gardez votre compte protégé avec un mot de passe fort.</small>
+        </div>
+
+        <div>
+            <label class="block text-gray-700 mb-1" for="id_entreprise"><i class="fas fa-building mr-2"></i>Nom de l’établissement</label>
+            {{ form.entreprise|add_class:"w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" }}
+            <small class="text-gray-500">Affiché sur le site lorsque des clients cherchent une chambre.</small>
+        </div>
+
+        <div>
+            <label class="block text-gray-700 mb-1" for="id_telephone"><i class="fas fa-phone mr-2"></i>Numéro de téléphone</label>
+            {{ form.telephone|add_class:"w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400" }}
+        </div>
+
+        <a href="{% url 'form' %}" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">Créer mon compte</a>
+    </form>
+    {% for message in messages %}
+    <p>{{message}}</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>

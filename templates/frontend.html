@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogÉtude - Trouve ton logement étudiant idéal</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-blue: #2563eb;
+            --secondary-blue: #1e40af;
+            --accent-orange: #f59e0b;
+            --dark-orange: #d97706;
+            --light-bg: #f8fafc;
+            --dark-text: #1e293b;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+        }
+        
+        .navbar-brand span {
+            color: var(--accent-orange);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2076&q=80');
+            background-size: cover;
+            background-position: center;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            color: white;
+        }
+        
+        .search-card {
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(50%);
+            margin-bottom: -100px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-blue);
+            border-color: var(--primary-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary-blue);
+            border-color: var(--secondary-blue);
+            transform: translateY(-2px);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent-orange);
+            border-color: var(--accent-orange);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-accent:hover {
+            background-color: var(--dark-orange);
+            border-color: var(--dark-orange);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .property-card {
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .property-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .property-price {
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+        
+        .property-location {
+            color: #64748b;
+            display: flex;
+            align-items: center;
+        }
+        
+        .feature-card {
+            padding: 2rem;
+            text-align: center;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-blue);
+        }
+        
+        .feature-card:nth-child(2) .feature-icon {
+            color: var(--accent-orange);
+        }
+        
+        .feature-card:nth-child(3) .feature-icon {
+            color: #10b981;
+        }
+        
+        footer {
+            background-color: var(--dark-text);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+        
+        .social-icon {
+            font-size: 1.5rem;
+            color: white;
+            margin-right: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            color: var(--accent-orange);
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .search-card {
+                transform: translateY(20%);
+                margin-bottom: -60px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <span class="text-orange-500">Log</span><span class="text-blue-600">Étude</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active fw-medium" href="{%url 'principe'%}">Accueil</a>
+                    </li>
+                    <li class="nav-item text-dark">
+                        <a class="nav-link fw-medium" href="#">Annonces</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="{%url 'apropos'%}">À propos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-accent mt-2 mt-lg-0" href="{%url 'index'%}">Connexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h1 class="display-4 fw-bold mb-4">Trouve ton logement étudiant idéal</h1>
+                    <p class="lead mb-5">Plus de 10 000 logements disponibles dans toute la France. Des prix étudiés pour toutes les bourses.</p>
+                    <a href="#" class="btn btn-primary btn-lg px-4 me-2">Voir les annonces</a>
+                    <a href="#" class="btn btn-outline-light btn-lg px-4">Déposer une annonce</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Form -->
+    <div class="container">
+        <div class="search-card" data-aos="fade-up">
+            <form>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="city" class="form-label">Ville</label>
+                        <select class="form-select" id="city">
+                            <option selected>Toutes les villes</option>
+                            <option>Paris</option>
+                            <option>Lyon</option>
+                            <option>Marseille</option>
+                            <option>Toulouse</option>
+                            <option>Bordeaux</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="type" class="form-label">Type de logement</label>
+                        <select class="form-select" id="type">
+                            <option selected>Tous les types</option>
+                            <option>Studio</option>
+                            <option>Colocation</option>
+                            <option>Appartement</option>
+                            <option>Chambre chez l'habitant</option>
+                            <option>Résidence étudiante</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <label for="budget" class="form-label">Budget mensuel</label>
+                        <select class="form-select" id="budget">
+                            <option selected>Tous budgets</option>
+                            <option>Moins de 400€</option>
+                            <option>400€ - 600€</option>
+                            <option>600€ - 800€</option>
+                            <option>800€ - 1000€</option>
+                            <option>Plus de 1000€</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end">
+                        <button type="submit" class="btn btn-accent w-100">Rechercher</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Popular Properties -->
+    <section class="py-5 my-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Annonces populaires</h2>
+                <p class="text-muted lead">Découvrez les logements les plus recherchés</p>
+            </div>
+            
+            <div class="row">
+                <!-- Property 1 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="property-card">
+                        <img src="https://images.unsplash.com/photo-1554469384-e58fac16e23a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80" class="img-fluid" alt="Studio étudiant">
+                        <div class="p-4">
+                            <h4 class="fw-bold">Studio lumineux</h4>
+                            <p class="property-price">450€/mois</p>
+                            <p class="property-location"><i class="fas fa-map-marker-alt me-2"></i> Paris 5ème</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span><i class="fas fa-bed me-2"></i> 1</span>
+                                <span><i class="fas fa-expand me-2"></i> 25m²</span>
+                                <span><i class="fas fa-warehouse me-2"></i> Meublé</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100 mt-3">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 2 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="property-card">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid" alt="Colocation">
+                        <div class="p-4">
+                            <h4 class="fw-bold">Colocation spacieuse</h4>
+                            <p class="property-price">350€/mois</p>
+                            <p class="property-location"><i class="fas fa-map-marker-alt me-2"></i> Lyon 2ème</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span><i class="fas fa-bed me-2"></i> 1</span>
+                                <span><i class="fas fa-expand me-2"></i> 15m² (70m² total)</span>
+                                <span><i class="fas fa-warehouse me-2"></i> Meublé</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100 mt-3">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Property 3 -->
+                <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="property-card">
+                        <img src="https://images.unsplash.com/photo-1493809842364-78817add7ffb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" class="img-fluid" alt="Appartement étudiant">
+                        <div class="p-4">
+                            <h4 class="fw-bold">Appartement moderne</h4>
+                            <p class="property-price">620€/mois</p>
+                            <p class="property-location"><i class="fas fa-map-marker-alt me-2"></i> Bordeaux Centre</p>
+                            <div class="d-flex justify-content-between mt-3">
+                                <span><i class="fas fa-bed me-2"></i> 2</span>
+                                <span><i class="fas fa-expand me-2"></i> 42m²</span>
+                                <span><i class="fas fa-warehouse me-2"></i> Meublé</span>
+                            </div>
+                            <a href="#" class="btn btn-outline-primary w-100 mt-3">Voir détails</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="#" class="btn btn-primary px-4">Voir toutes les annonces</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Pourquoi choisir LogÉtude ?</h2>
+                <p class="text-muted lead">Nous simplifions votre recherche de logement étudiant</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Sécurité</h4>
+                        <p>Toutes nos annonces sont vérifiées pour vous garantir des hébergements de qualité et sécurisés.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Simplicité</h4>
+                        <p>Notre plateforme intuitive vous permet de trouver rapidement le logement qui correspond à vos besoins.</p>
+                    </div>
+                </div>
+                
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <h4 class="fw-bold mb-3">Accompagnement</h4>
+                        <p>Notre équipe vous accompagne tout au long de votre recherche et de votre installation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-5 bg-primary text-white">
+        <div class="container">
+            <div class="row text-center">
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="100">
+                    <h2 class="fw-bold">10,000+</h2>
+                    <p class="lead">Logements disponibles</p>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="200">
+                    <h2 class="fw-bold">120+</h2>
+                    <p class="lead">Villes partenaires</p>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="300">
+                    <h2 class="fw-bold">85%</h2>
+                    <p class="lead">Taux de satisfaction</p>
+                </div>
+                <div class="col-md-3" data-aos="fade-up" data-aos-delay="400">
+                    <h2 class="fw-bold">24/7</h2>
+                    <p class="lead">Support disponible</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="fw-bold">Témoignages</h2>
+                <p class="text-muted lead">Ce que disent les étudiants qui nous font confiance</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex mb-3">
+                                <img src="https://randomuser.me/api/portraits/women/44.jpg" class="rounded-circle me-3" width="60" height="60" alt="Emma">
+                                <div>
+                                    <h5 class="mb-1">Emma L.</h5>
+                                    <p class="text-muted small mb-0">Étudiante en médecine</p>
+                                </div>
+                            </div>
+                            <p class="card-text">"J'ai trouvé mon studio en moins d'une semaine grâce à LogÉtude. L'équipe m'a vraiment accompagnée dans mes démarches."</p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex mb-3">
+                                <img src="https://randomuser.me/api/portraits/men/32.jpg" class="rounded-circle me-3" width="60" height="60" alt="Thomas">
+                                <div>
+                                    <h5 class="mb-1">Thomas G.</h5>
+                                    <p class="text-muted small mb-0">Étudiant en informatique</p>
+                                </div>
+                            </div>
+                            <p class="card-text">"La colocation que j'ai trouvée est parfaite. Tout s'est fait en ligne simplement, ce qui m'a fait gagner un temps précieux."</p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 border-0 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex mb-3">
+                                <img src="https://randomuser.me/api/portraits/women/68.jpg" class="rounded-circle me-3" width="60" height="60" alt="Sophie">
+                                <div>
+                                    <h5 class="mb-1">Sophie M.</h5>
+                                    <p class="text-muted small mb-0">Étudiante en droit</p>
+                                </div>
+                            </div>
+                            <p class="card-text">"Je recommande vivement LogÉtude. Les propriétaires sont vérifiés et les prix correspondent vraiment à ce qui est annoncé."</p>
+                            <div class="text-warning">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center" data-aos="fade-up">
+                    <h2 class="fw-bold mb-3">Restez informé</h2>
+                    <p class="lead mb-4">Inscrivez-vous à notre newsletter pour recevoir les nouvelles annonces en avant-première.</p>
+                    <form class="d-flex">
+                        <input type="email" class="form-control form-control-lg me-2" placeholder="Votre email">
+                        <button type="submit" class="btn btn-accent">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h3 class="fw-bold mb-4 text-white"><span class="text-orange-400">Log</span><span class="text-blue-400">Étude</span></h3>
+                    <p>La plateforme de référence pour trouver votre logement étudiant en toute simplicité et sécurité.</p>
+                    <div class="mt-4">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-md-2">
+                    <h5 class="text-white mb-4">Liens utiles</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50">Accueil</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Annonces</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Blog</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">FAQ</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3">
+                    <h5 class="text-white mb-4">Informations</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#" class="text-white-50">Mentions légales</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">CGU</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Politique de confidentialité</a></li>
+                        <li class="mb-2"><a href="#" class="text-white-50">Conditions de vente</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-3">
+                    <h5 class="text-white mb-4">Contact</h5>
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-3"><i class="fas fa-map-marker-alt me-2"></i> 123 Rue du Campus, Paris</li>
+                        <li class="mb-3"><i class="fas fa-phone me-2"></i> +33 1 23 45 67 89</li>
+                        <li class="mb-3"><i class="fas fa-envelope me-2"></i> contact@logetude.fr</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <hr class="my-4 bg-secondary">
+            
+            <div class="text-center">
+                <p class="text-white-50 mb-0">&copy; 2023 LogÉtude. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialize AOS animation
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Add scroll animation to navbar
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow');
+                navbar.classList.add('bg-white');
+                navbar.classList.remove('bg-transparent');
+            } else {
+                navbar.classList.remove('shadow');
+                navbar.classList.add('bg-white');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

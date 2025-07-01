@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LogÉtude - Inscription</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .bg-gradient-blue {
+        background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      }
+      .shadow-custom {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      }
+      .radio-card:hover {
+        border-color: #3b82f6;
+        transform: translateY(-2px);
+      }
+      .radio-card.selected {
+        border-color: #3b82f6;
+        background-color: rgba(59, 130, 246, 0.05);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+      <div
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-home text-blue-600 text-2xl"></i>
+          <h1 class="text-xl font-bold text-gray-800">LogÉtude</h1>
+        </div>
+        <nav class="hidden md:block">
+          <ul class="flex space-x-6">
+            <li>
+              <a href="{%url 'principe'%}" class="text-gray-500 hover:text-blue-600 transition"
+                >Accueil</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-500 hover:text-blue-600 transition"
+                >Annonces</a
+              >
+            </li>
+            <li>
+              <a href="#" class="text-gray-500 hover:text-blue-600 transition"
+                >Connexion</a
+              >
+            </li>
+          </ul>
+        </nav>
+        <button class="md:hidden text-gray-500">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 md:py-12">
+      <div class="max-w-md mx-auto">
+        <!-- Card Form -->
+      <p class="bg-red-100 border border-red-300 text-red-700 px-4 py-2 rounded">
+        {{ message }}
+      </p>
+        <div class="bg-white rounded-xl shadow-custom overflow-hidden">
+          <!-- Card Header -->
+          <div class="bg-gradient-blue py-6 px-8 text-white">
+            <h2 class="text-2xl font-bold">Créer un compte</h2>
+            <p class="text-blue-100 mt-1">Rejoignez notre communauté</p>
+          </div>
+
+          <!-- Card Body -->
+          <div class="p-8">
+            <form id="registerForm" method="post" action="{% url 'inscription' %}">
+              {% csrf_token %}
+              <div class="mb-4">
+                <label for="nom" class="block text-gray-600 mb-2"
+                  >Nom complet (nom & prenom)</label
+                >
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="nom"
+                    name="nom"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    placeholder="Votre nom"
+                    required
+                  />
+                  <i
+                    class="fas fa-id-card absolute right-3 top-3 text-gray-400"
+                  ></i>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label for="email" class="block text-gray-600 mb-2"
+                  >Email</label
+                >
+                <div class="relative">
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    placeholder="exemple@email.com"
+                    required
+                  />
+                  <i
+                    class="fas fa-envelope absolute right-3 top-3 text-gray-400"
+                  ></i>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label for="telephone" class="block text-gray-600 mb-2"
+                  >Téléphone</label
+                >
+                <div class="relative">
+                  <input
+                    type="tel"
+                    id="telephone"
+                    name="telephone"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    placeholder="06 12 34 56 78"
+                  />
+                  <i
+                    class="fas fa-phone absolute right-3 top-3 text-gray-400"
+                  ></i>
+                </div>
+              </div>
+
+              <div class="mb-4">
+                <label for="password" class="block text-gray-600 mb-2"
+                  >Mot de passe</label
+                >
+                <div class="relative">
+                  <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    placeholder="*******"
+                    required
+                  />
+                  <i
+                    class="fas fa-lock absolute right-3 top-3 text-gray-400"
+                  ></i>
+                </div>
+              </div>
+
+              <div class="mb-6">
+                <label
+                  for="confirmPassword"
+                  name="confirmPassword"
+                  class="block text-gray-600 mb-2"
+                  >Confirmation du mot de passe</label
+                >
+                <div class="relative">
+                  <input
+                    type="password"
+                    id="confirmPassword"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    placeholder="*******"
+                    required
+                  />
+                  <i
+                    class="fas fa-key absolute right-3 top-3 text-gray-400"
+                  ></i>
+                </div>
+              </div>
+
+              <!-- User Type Selection -->
+              <div class="mb-6">
+                <label class="block text-gray-600 mb-3">Vous êtes :</label>
+                <div class="grid grid-cols-2 gap-4">
+                  <label for="etudiant" class="radio-card flex-1">
+                    <input
+                      type="radio"
+                      id="etudiant"
+                      name="userType"
+                      value="etudiant"
+                      class="hidden"
+                      checked
+                    />
+                    <div
+                      class="border border-gray-300 rounded-lg p-4 flex flex-col items-center cursor-pointer transition duration-200 hover:shadow-md radio-card"
+                    >
+                      <div
+                        class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-2"
+                      >
+                        <i
+                          class="fas fa-graduation-cap text-blue-600 text-xl"
+                        ></i>
+                      </div>
+                      <span class="font-medium text-gray-700">Étudiant</span>
+                    </div>
+                  </label>
+                  <label for="proprietaire" class="radio-card flex-1">
+                    <input
+                      type="radio"
+                      id="proprietaire"
+                      name="userType"
+                      value="proprietaire"
+                      class="hidden"
+                    />
+                    <div
+                      class="border border-gray-300 rounded-lg p-4 flex flex-col items-center cursor-pointer transition duration-200 hover:shadow-md radio-card"
+                    >
+                      <div
+                        class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mb-2"
+                      >
+                        <i class="fas fa-home text-orange-500 text-xl"></i>
+                      </div>
+                      <span class="font-medium text-gray-700"
+                        >Propriétaire</span
+                      >
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <!-- Champ Filière (Étudiant) -->
+              <div id="filiereField" class="mb-4">
+                <label for="filiere" class="block text-gray-600 mb-2"
+                  >Filière</label
+                >
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="filiere"
+                    name="filiere"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    placeholder="Ex: Informatique, Droit..."
+                  />
+                  <i
+                    class="fas fa-book absolute right-3 top-3 text-gray-400"
+                  ></i>
+                </div>
+              </div>
+
+              <!-- Champ Entreprise (Propriétaire) -->
+              <div id="entrepriseField" class="mb-4 hidden">
+                <label for="entreprise" class="block text-gray-600 mb-2"
+                  >Entreprise</label
+                >
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="entreprise"
+                    name="entreprise"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    placeholder="Ex: Orange, MTN..."
+                  />
+                  <i
+                    class="fas fa-building absolute right-3 top-3 text-gray-400"
+                  ></i>
+                </div>
+              </div>
+
+              <div id="matriculeField" class="mb-4 hidden">
+                <label for="matricule" class="block text-gray-600 mb-2"
+                  >Matricule</label
+                >
+                <div class="relative">
+                  <input
+                    type="text"
+                    id="matricule"
+                    name="matricule"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                    placeholder="Ex: 22A452"
+                  />
+                  <i
+                    class="fas fa-id-badge absolute right-3 top-3 text-gray-400"
+                  ></i>
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-200 shadow-md hover:shadow-lg"
+              >
+                S'inscrire
+              </button>
+            </form>
+
+            <div class="mt-4 text-center">
+              <p class="text-gray-600">
+                Vous avez déjà un compte ?
+                <a href="{%url 'index'%}" class="text-blue-600 hover:underline"
+                  >Connectez-vous</a
+                >
+              </p>
+            </div>
+
+            <div class="mt-6 text-center">
+              <div class="inline-flex items-center justify-center w-full">
+                <hr class="w-full h-px bg-gray-200 border-0" />
+                <span class="absolute px-3 bg-white text-gray-400">ou</span>
+              </div>
+
+              <div class="mt-4 flex justify-center space-x-4">
+                <button
+                  class="bg-red-100 text-red-600 p-3 rounded-full hover:bg-red-200 transition"
+                >
+                  <i class="fab fa-google"></i>
+                </button>
+                <button
+                  class="bg-blue-100 text-blue-600 p-3 rounded-full hover:bg-blue-200 transition"
+                >
+                  <i class="fab fa-facebook-f"></i>
+                </button>
+                <button
+                  class="bg-gray-200 text-gray-700 p-3 rounded-full hover:bg-gray-300 transition"
+                >
+                  <i class="fab fa-apple"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 border-t border-gray-200 mt-12">
+      <div class="container mx-auto px-4 py-8">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="mb-4 md:mb-0">
+            <div class="flex items-center space-x-2">
+              <i class="fas fa-home text-blue-600 text-xl"></i>
+              <span class="font-bold text-gray-800">LogÉtude</span>
+            </div>
+            <p class="text-gray-500 text-sm mt-2">
+              Trouvez votre logement étudiant idéal.
+            </p>
+          </div>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-500 hover:text-blue-600 transition"
+              >Mentions légales</a
+            >
+            <a href="#" class="text-gray-500 hover:text-blue-600 transition"
+              >CGU</a
+            >
+            <a href="#" class="text-gray-500 hover:text-blue-600 transition"
+              >Contact</a
+            >
+          </div>
+        </div>
+        <div
+          class="mt-6 pt-6 border-t border-gray-200 text-center text-sm text-gray-500"
+        >
+          © 2023 LogÉtude - Tous droits réservés
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Gestion des cartes radio
+      const radioCards = document.querySelectorAll(".radio-card");
+      const radioInputs = document.querySelectorAll('input[name="userType"]');
+
+      radioCards.forEach((card, index) => {
+        card.addEventListener("click", () => {
+          // Supprime la classe selected de toutes les cartes
+          radioCards.forEach((c) => {
+            c.querySelector("div").classList.remove("selected");
+          });
+
+          // Ajoute selected à la carte cliquée
+          card.querySelector("div").classList.add("selected");
+
+          // Coche l'input radio correspondant
+          radioInputs[index].checked = true;
+        });
+      });
+
+      // Au chargement, cocher la première carte par défaut
+      document.addEventListener("DOMContentLoaded", () => {
+        radioCards[0].querySelector("div").classList.add("selected");
+      });
+
+
+
+     document.addEventListener("DOMContentLoaded", function () {
+    const etudiantRadio = document.getElementById("etudiant");
+    const proprietaireRadio = document.getElementById("proprietaire");
+
+    const filiereField = document.getElementById("filiereField");
+    const entrepriseField = document.getElementById("entrepriseField");
+    const telephoneField = document.getElementById("telephoneField");
+    const matriculeField = document.getElementById("matriculeField");
+
+    function toggleFields() {
+        if (etudiantRadio.checked) {
+            filiereField.classList.remove("hidden");
+            matriculeField.classList.remove("hidden");
+            entrepriseField.classList.add("hidden");
+            telephoneField.classList.add("hidden");
+        } else if (proprietaireRadio.checked) {
+            entrepriseField.classList.remove("hidden");
+            telephoneField.classList.remove("hidden");
+            filiereField.classList.add("hidden");
+            matriculeField.classList.add("hidden");
+        }
+    }
+
+    etudiantRadio.addEventListener("change", toggleFields);
+    proprietaireRadio.addEventListener("change", toggleFields);
+
+    // Initialisation
+    toggleFields();
+});
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="form-container">
+    <form method="post" class="register-form" action="{% url 'inscription' %}">
+        {% csrf_token %}
+        <h2>Créer un compte</h2>
+
+        <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" name="nom" placeholder="Nom complet" required>
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" name="email" placeholder="Adresse email" required>
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" name="mot_de_passe" placeholder="Mot de passe sécurisé" required>
+        </div>
+
+        <button type="submit" class="btn">S'inscrire</button>
+    </form>
+    <a href="{% url 'connexion' %}" class="login-link">
+        <i class="fas fa-sign-in-alt"></i> Vous avez déjà un compte ? Connectez-vous ici
+    </a>
+        {% if messages %}
+    <div class="message">
+        <i class="fas fa-info-circle"></i> {{ message }}
+    {% endif %}
+</div>
+
+</body>
+</html>

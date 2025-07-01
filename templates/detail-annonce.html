@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogÉtude - Détail de l'annonce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'DM Sans', sans-serif;
+        }
+        .carousel-container {
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            transition: opacity 0.5s ease;
+        }
+        .carousel-slide.active {
+            display: block;
+            opacity: 1;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 15px;
+            cursor: pointer;
+            border-radius: 50%;
+            z-index: 10;
+        }
+        .carousel-btn.prev {
+            left: 20px;
+        }
+        .carousel-btn.next {
+            right: 20px;
+        }
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+        .carousel-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+        }
+        .carousel-indicator.active {
+            background-color: white;
+        }
+        .contact-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+        }
+        .contact-modal.active {
+            display: flex;
+        }
+        @media (max-width: 768px) {
+            .carousel-container {
+                height: 300px;
+            }
+            .detail-container {
+                flex-direction: column;
+            }
+            .info-section {
+                width: 100%;
+                padding: 20px 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-bold text-blue-600">Log<span class="text-blue-800">Étude</span></h1>
+            </div>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="text-gray-700 hover:text-blue-600 transition">Accueil</a>
+                <a href="#" class="text-gray-700 hover:text-blue-600 transition">Annonces</a>
+                <a href="#" class="text-gray-700 hover:text-blue-600 transition">Déposer une annonce</a>
+                <a href="{%url 'index'%}" class="text-gray-700 hover:text-blue-600 transition">Connexion</a>
+            </nav>
+            <button class="md:hidden text-gray-700">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Carousel and Info Section -->
+        <div class="detail-container flex flex-col md:flex-row gap-8 mb-12">
+            <!-- Carousel -->
+            <div class="w-full md:w-2/3">
+                    <div class="carousel-container rounded-lg shadow-lg overflow-hidden">
+                        {%for imag in imagese%}
+                        <div class="carousel-slide active"><img style="background-size: cover; height: 100%; width: 100%;" src="{{imag.image.url}}" alt=""></div>
+                        {%endfor%}
+                        <button class="carousel-btn prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <div class="carousel-indicators">
+                            <div class="carousel-indicator active"></div>
+                            <div class="carousel-indicator"></div>
+                            <div class="carousel-indicator"></div>
+                            <div class="carousel-indicator"></div>
+                        </div>
+                    </div>
+            </div>
+            
+            <!-- Info Section -->
+            <div class="w-full md:w-1/3 bg-white p-6 rounded-lg shadow-md">
+                <div class="border-b border-gray-200 pb-4 mb-4">
+                    <h2 class="text-2xl font-bold text-gray-800">{{logements.titre}}</h2>
+                    <div class="flex items-center text-gray-600 mt-1">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        <span>Paris 5e, quartier latin</span>
+                    </div>
+                </div>
+                
+                <div class="flex justify-between items-center mb-4">
+                    <span class="text-3xl font-bold text-blue-600">{{logements.prix}}€<span class="text-lg font-normal text-gray-600">/mois</span></span>
+                    <span class="bg-blue-100 text-blue-800 py-1 px-3 rounded-full text-sm font-medium">Disponible</span>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="flex items-center">
+                        <i class="fas fa-ruler-combined text-blue-500 mr-2"></i>
+                        <span class="text-gray-700">{{logements.surface}} m²</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-home text-blue-500 mr-2"></i>
+                        <span class="text-gray-700">{{logements.type}}</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-bed text-blue-500 mr-2"></i>
+                        <span class="text-gray-700">1 lit</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="fas fa-warehouse text-blue-500 mr-2"></i>
+                        {%if logements.meublement%}
+                        <span class="text-gray-700">Meublé</span>
+                        {%else%}
+                        <span class="text-gray-700">Non Meublé</span>
+                        {%endif%}
+                    </div>
+                </div>
+                
+                <a href="#" class="block bg-blue-600 hover:bg-blue-700 text-white text-center py-3 px-4 rounded-lg font-medium transition duration-300 w-full">
+                    <i class="far fa-heart mr-2"></i> Ajouter aux favoris
+                </a>
+            </div>
+        </div>
+        
+        <!-- Description Section -->
+        <div class="bg-white p-6 rounded-lg shadow-md mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                <i class="fas fa-align-left text-blue-500 mr-2"></i> Description
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="text-gray-700 space-y-4">
+                    {{logements.description}}
+                </div>
+                <div>
+                    <h4 class="font-medium text-gray-800 mb-2">Points forts :</h4>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Très bonne isolation phonique et thermique</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Ascenseur</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Double vitrage</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Fibre optique</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Gardien d'immeuble</li>
+                    </ul>
+                    
+                    <h4 class="font-medium text-gray-800 mt-6 mb-2">Transport :</h4>
+                    <ul class="space-y-2 text-gray-700">
+                        <li class="flex items-center"><i class="fas fa-subway text-blue-500 mr-2"></i> Métro : Place Monge (ligne 7) - 3 min</li>
+                        <li class="flex items-center"><i class="fas fa-subway text-blue-500 mr-2"></i> RER B : Luxembourg - 8 min</li>
+                        <li class="flex items-center"><i class="fas fa-bus text-blue-500 mr-2"></i> Bus : 47, 67, 89</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Owner and Map Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Owner Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-user text-blue-500 mr-2"></i> À propos du propriétaire
+                </h3>
+                
+                <div class="flex items-center mb-4">
+                    <div class="w-16 h-16 rounded-full overflow-hidden mr-4">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Propriétaire" class="w-full h-full object-cover">
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800" style="text-transform: uppercase;">{{logements.proprietaire.nom}}</h4>
+                        <p class="text-gray-600 text-sm">Membre depuis 2018</p>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-50 p-4 rounded-lg mb-4">
+                    <a href="#" class="block text-gray-700 mb-2"><i class="fas fa-envelope text-blue-500 mr-2" ></i><b>{{logements.proprietaire.email}}</b></a>
+                    <a href="#" class="block text-gray-700"><i class="fas fa-phone text-blue-500 mr-2"></i><b>{{logements.proprietaire.telephone}}</b></a>
+                </div>
+                
+                <p class="text-gray-700 mb-4">Je suis propriétaire depuis 10 ans dans ce quartier et je mets régulièrement des logements à disposition des étudiants. Tous mes biens sont entretenus avec soin.</p>
+                
+                <button id="contactBtn" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-lg font-medium transition duration-300 w-full">
+                    <i class="fas fa-paper-plane mr-2"></i> Contacter le propriétaire
+                </button>
+            </div>
+            
+            <!-- Map Section -->
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-map-marked-alt text-blue-500 mr-2"></i> Localisation
+                </h3>
+                
+                <div class="bg-gray-200 h-64 rounded-lg overflow-hidden relative">
+                    <!-- Fake map with marker -->
+                    <div class="absolute inset-0 bg-gray-300 flex items-center justify-center">
+                        <div class="text-center p-4">
+                            <i class="fas fa-map-marker-alt text-red-500 text-3xl mb-2"></i>
+                            <p class="text-gray-700">12 Rue Descartes, 75005 Paris</p>
+                            <p class="text-sm text-gray-500">(carte simulée)</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4 text-gray-700 space-y-2">
+                    <p><i class="fas fa-info-circle text-blue-500 mr-2"></i> Quartier animé avec nombreux commerces et restaurants</p>
+                    <p><i class="fas fa-university text-blue-500 mr-2"></i> Proche de la Sorbonne (10 min à pied)</p>
+                    <p><i class="fas fa-shopping-bag text-blue-500 mr-2"></i> Supermarché à 200m</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Similar Listings -->
+        <div class="mb-12">
+            <h3 class="text-xl font-bold text-gray-800 mb-6 flex items-center">
+                <i class="fas fa-home text-blue-500 mr-2"></i> Annonces similaires
+            </h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Similar Listing 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                    <div class="h-48 bg-gray-300 relative">
+                        <div class="absolute top-3 left-3 bg-white px-2 py-1 rounded text-sm font-medium text-gray-800">Disponible</div>
+                        <div class="absolute top-3 right-3 text-white">
+                            <i class="far fa-heart text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-gray-800 mb-1">Studio étudiant proche Jussieu</h4>
+                        <p class="text-gray-600 text-sm mb-2 flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-500 mr-1"></i> Paris 5e
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-600 font-bold">480€<span class="text-gray-600 text-sm font-normal">/mois</span></span>
+                            <span class="text-gray-700 text-sm">22 m²</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Similar Listing 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                    <div class="h-48 bg-gray-400 relative">
+                        <div class="absolute top-3 left-3 bg-white px-2 py-1 rounded text-sm font-medium text-gray-800">Disponible</div>
+                        <div class="absolute top-3 right-3 text-white">
+                            <i class="far fa-heart text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-gray-800 mb-1">Chambre en colocation</h4>
+                        <p class="text-gray-600 text-sm mb-2 flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-500 mr-1"></i> Paris 13e
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-600 font-bold">390€<span class="text-gray-600 text-sm font-normal">/mois</span></span>
+                            <span class="text-gray-700 text-sm">15 m²</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Similar Listing 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition duration-300">
+                    <div class="h-48 bg-gray-500 relative">
+                        <div class="absolute top-3 left-3 bg-white px-2 py-1 rounded text-sm font-medium text-gray-800">Disponible</div>
+                        <div class="absolute top-3 right-3 text-white">
+                            <i class="far fa-heart text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h4 class="font-bold text-gray-800 mb-1">Appartement T1 meublé</h4>
+                        <p class="text-gray-600 text-sm mb-2 flex items-center">
+                            <i class="fas fa-map-marker-alt text-blue-500 mr-1"></i> Montrouge
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-blue-600 font-bold">550€<span class="text-gray-600 text-sm font-normal">/mois</span></span>
+                            <span class="text-gray-700 text-sm">30 m²</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Contact Modal -->
+    <div id="contactModal" class="contact-modal">
+        <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">Contactez le propriétaire</h3>
+                <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <form class="space-y-4">
+                <div>
+                    <label for="name" class="block text-gray-700 mb-1">Votre nom</label>
+                    <input type="text" id="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div>
+                    <label for="email" class="block text-gray-700 mb-1">Votre email</label>
+                    <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                </div>
+                
+                <div>
+                    <label for="message" class="block text-gray-700 mb-1">Message</label>
+                    <textarea id="message" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                </div>
+                
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition duration-300">
+                    <i class="fas fa-paper-plane mr-2"></i> Envoyer le message
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">LogÉtude</h3>
+                    <p class="text-gray-400 text-sm">La plateforme de référence pour trouver votre logement étudiant en France.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Accueil</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Annonces</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Déposer une annonce</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Connexion</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Informations</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">À propos</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Mentions légales</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Nous suivre</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                    </div>
+                    <div class="mt-4">
+                        <p class="text-gray-400 text-sm">Téléchargez notre application :</p>
+                        <div class="flex space-x-2 mt-2">
+                            <a href="#" class="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded text-sm flex items-center">
+                                <i class="fab fa-apple mr-1"></i> App Store
+                            </a>
+                            <a href="#" class="bg-gray-700 hover:bg-gray-600 px-3 py-1 rounded text-sm flex items-center">
+                                <i class="fab fa-google-play mr-1"></i> Play Store
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>© 2023 LogÉtude. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Carousel functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const slides = document.querySelectorAll('.carousel-slide');
+            const prevBtn = document.querySelector('.carousel-btn.prev');
+            const nextBtn = document.querySelector('.carousel-btn.next');
+            const indicators = document.querySelectorAll('.carousel-indicator');
+            
+            let currentSlide = 0;
+            
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                indicators.forEach(indicator => indicator.classList.remove('active'));
+                
+                slides[index].classList.add('active');
+                indicators[index].classList.add('active');
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }
+            
+            function prevSlide() {
+                currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(currentSlide);
+            }
+            
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // Add click event for indicators
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    currentSlide = index;
+                    showSlide(currentSlide);
+                });
+            });
+            
+            // Auto slide change
+            setInterval(nextSlide, 5000);
+            
+            // Modal functionality
+            const contactBtn = document.getElementById('contactBtn');
+            const closeModal = document.getElementById('closeModal');
+            const modal = document.getElementById('contactModal');
+            
+            contactBtn.addEventListener('click', () => {
+                modal.classList.add('active');
+            });
+            
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+            
+            // Close modal when clicking outside
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Déposer une annonce - LogÉtude</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* Custom CSS for parts that can't be done with Tailwind */
+      .dropzone {
+        border: 2px dashed #2563eb;
+        border-radius: 0.5rem;
+        transition: all 0.3s;
+      }
+      .dropzone.active {
+        border-color: #f59e0b;
+        background-color: rgba(245, 158, 11, 0.05);
+      }
+      input[type="file"] {
+        display: none;
+      }
+      input:invalid,
+      textarea:invalid,
+      select:invalid {
+        border-color: #ef4444;
+      }
+      input:valid,
+      textarea:valid,
+      select:valid {
+        border-color: #10b981;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <!-- User state (change to false to see not logged state) -->
+    <script>
+      const isLoggedIn = true;
+    </script>
+
+    <!-- Header -->
+    <header class="bg-blue-600 text-white shadow-lg">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <!-- Logo -->
+          <a href="#" class="flex items-center space-x-2">
+            <i class="fas fa-home text-2xl text-orange-400"></i>
+            <span class="text-xl font-bold">LogÉtude</span>
+          </a>
+
+          <!-- Navigation -->
+          <nav class="hidden md:flex space-x-6">
+            <a href="{%url 'dashbords'%}" class="hover:text-orange-300 transition">Accueil</a>
+            <a href="#" class="hover:text-orange-300 transition">Annonces</a>
+            <a href="#" class="font-bold text-orange-400 transition"
+              >Déposer une annonce</a
+            >
+            <a
+              href="#"
+              id="profileLink"
+              class="hover:text-orange-300 transition"
+            >
+              <script>
+                document.write(
+                  isLoggedIn
+                    ? '<i class="fas fa-user-circle mr-1"></i> Profil'
+                    : '<i class="fas fa-sign-in-alt mr-1"></i> Connexion'
+                );
+              </script>
+            </a>
+          </nav>
+
+          <!-- Mobile menu button -->
+          <button
+            class="md:hidden text-xl focus:outline-none"
+            id="mobileMenuButton"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden py-4 space-y-3" id="mobileMenu">
+          <a href="#" class="block hover:text-orange-300 transition">Accueil</a>
+          <a href="#" class="block hover:text-orange-300 transition"
+            >Annonces</a
+          >
+          <a href="#" class="block font-bold text-orange-400 transition"
+            >Déposer une annonce</a
+          >
+          <a
+            href="#"
+            id="profileLinkMobile"
+            class="block hover:text-orange-300 transition"
+          >
+            <script>
+              document.write(
+                isLoggedIn
+                  ? '<i class="fas fa-user-circle mr-1"></i> Profil'
+                  : '<i class="fas fa-sign-in-alt mr-1"></i> Connexion'
+              );
+            </script>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow container mx-auto px-4 py-8" id="mainContent">
+      <script>
+        if (!isLoggedIn) {
+          document.getElementById("mainContent").innerHTML = `
+                    <div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8 text-center">
+                        <div class="text-6xl mb-6 text-orange-400">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Connectez-vous pour publier une annonce</h2>
+                        <p class="text-gray-600 mb-6">Vous devez être connecté à votre compte pour déposer une annonce sur LogÉtude.</p>
+                        <a href="#" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 transform hover:scale-105">
+                            <i class="fas fa-sign-in-alt mr-2"></i> Connexion
+                        </a>
+                    </div>
+                `;
+        }
+      </script>
+
+      <!-- Content for logged in users -->
+      <div
+        id="formContent"
+        class="${!isLoggedIn ? 'hidden' : ''} max-w-4xl mx-auto"
+      >
+        <p
+          class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative shadow-md text-sm sm:text-base"
+          role="alert"
+        >
+          <i class="fas fa-check-circle mr-2"></i> {{ message }}
+        </p>
+
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
+          <i class="fas fa-plus-circle text-orange-400 mr-3"></i> Déposer une
+          annonce
+        </h1>
+
+        <form
+          class="bg-white rounded-lg shadow-md p-6 md:p-8"
+          method="post"
+          action="{% url 'cree_annonce' %}"
+          enctype="multipart/form-data"
+        >
+          {% csrf_token %}
+          <!-- Photos Section -->
+          <div class="mb-8">
+            <label class="block text-gray-700 font-bold mb-4"
+              >Photos du logement <span class="text-red-500">*</span></label
+            >
+            <div
+              class="dropzone p-8 text-center cursor-pointer mb-4"
+              id="dropzone"
+            >
+              <i
+                class="fas fa-cloud-upload-alt text-3xl text-blue-400 mb-2"
+              ></i>
+              <p class="text-gray-500">Glissez-déposez vos photos ici ou</p>
+              <label
+                for="fileInput"
+                class="inline-block mt-3 px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition cursor-pointer"
+              >
+                <i class="fas fa-folder-open mr-2"></i> Parcourir
+              </label>
+              <input
+                type="file"
+                id="fileInput"
+                multiple
+                accept="image/*"
+                name="images"
+              />
+            </div>
+            <div class="text-sm text-gray-500">
+              <i class="fas fa-info-circle mr-1"></i> Ajoutez jusqu'à 10 photos
+              (minimum 3 recommandé)
+            </div>
+            <!-- Preview container -->
+            <div
+              class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 mt-4"
+              id="previewContainer"
+            ></div>
+          </div>
+
+          <!-- Title -->
+          <div class="mb-6">
+            <label for="title" class="block text-gray-700 font-bold mb-2"
+              >Titre de l'annonce <span class="text-red-500">*</span></label
+            >
+            <input
+              type="text"
+              id="title"
+              name="title"
+              required
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Ex: Studio lumineux proche campus"
+            />
+          </div>
+
+          <!-- Property Type -->
+          <div class="mb-6">
+            <label for="type" class="block text-gray-700 font-bold mb-2"
+              >Type de logement <span class="text-red-500">*</span></label
+            >
+            <select
+              id="type"
+              name="type"
+              required
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <option value="" disabled selected>Sélectionnez un type</option>
+              <option value="studio">Studio</option>
+              <option value="appartement">Appartement</option>
+              <option value="colocation">Colocation</option>
+              <option value="chambre">Chambre</option>
+            </select>
+          </div>
+
+          <!-- Surface -->
+          <div class="mb-6">
+            <label for="surface" class="block text-gray-700 font-bold mb-2"
+              >Surface (m²) <span class="text-red-500">*</span></label
+            >
+            <div class="relative">
+              <input
+                type="number"
+                id="surface"
+                name="surface"
+                min="9"
+                max="200"
+                required
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 pl-12"
+                placeholder="Ex: 25"
+              />
+              <div class="absolute left-3 top-2.5 text-gray-400">
+                <i class="fas fa-ruler-combined"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Furnished -->
+          <div class="mb-6">
+            <label class="block text-gray-700 font-bold mb-2"
+              >Meublé ? <span class="text-red-500">*</span></label
+            >
+            <div class="flex items-center space-x-8">
+              <label class="inline-flex items-center">
+                <input
+                  type="radio"
+                  name="furnished"
+                  value="yes"
+                  required
+                  class="text-blue-600 focus:ring-blue-400"
+                />
+                <span class="ml-2">Oui</span>
+              </label>
+              <label class="inline-flex items-center">
+                <input
+                  type="radio"
+                  name="furnished"
+                  value="no"
+                  class="text-blue-600 focus:ring-blue-400"
+                />
+                <span class="ml-2">Non</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Price -->
+          <div class="mb-6">
+            <label for="price" class="block text-gray-700 font-bold mb-2"
+              >Prix mensuel (€) <span class="text-red-500">*</span></label
+            >
+            <div class="relative">
+              <input
+                type="number"
+                id="price"
+                name="price"
+                min="100"
+                max="2000"
+                required
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 pl-12"
+                placeholder="Ex: 450"
+              />
+              <div class="absolute left-3 top-2.5 text-gray-400">
+                <i class="fas fa-euro-sign"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Address -->
+          <div class="mb-8">
+            <label for="address" class="block text-gray-700 font-bold mb-2"
+              >Adresse <span class="text-red-500">*</span></label
+            >
+            <div class="relative">
+              <input
+                type="text"
+                id="address"
+                name="address"
+                required
+                class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 pl-12"
+                placeholder="Ex: 5 rue des Universités, 75005 Paris"
+              />
+              <div class="absolute left-3 top-2.5 text-gray-400">
+                <i class="fas fa-map-marker-alt"></i>
+              </div>
+            </div>
+          </div>
+
+          <!-- Additional Description -->
+          <div class="mb-8">
+            <label for="description" class="block text-gray-700 font-bold mb-2"
+              >Description supplémentaire</label
+            >
+            <textarea
+              id="description"
+              name="description"
+              rows="4"
+              class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              placeholder="Décrivez votre logement en détail (équipements, proximité transport, etc.)"
+            ></textarea>
+            <div class="text-sm text-gray-500 mt-1">
+              <i class="fas fa-info-circle mr-1"></i> Une description détaillée
+              augmente les chances d'attirer des locataires
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="text-center">
+            <button
+              type="submit"
+              class="bg-orange-400 hover:bg-orange-500 text-white font-bold py-3 px-8 rounded-full text-lg transition duration-300 transform hover:scale-105"
+            >
+              <i class="fas fa-paper-plane mr-2"></i> Soumettre l'annonce
+            </button>
+          </div>
+
+          <!-- Form note -->
+          <div class="text-sm text-gray-500 mt-6 text-center">
+            <i class="fas fa-info-circle mr-1"></i> Tous les champs marqués d'un
+            <span class="text-red-500">*</span> sont obligatoires
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-8">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between">
+          <!-- Logo and info -->
+          <div class="mb-6 md:mb-0">
+            <div class="flex items-center mb-4">
+              <i class="fas fa-home text-2xl text-orange-400 mr-2"></i>
+              <span class="text-xl font-bold text-white">LogÉtude</span>
+            </div>
+            <p class="max-w-xs">
+              La plateforme de référence pour trouver et proposer des logements
+              étudiants en France.
+            </p>
+          </div>
+
+          <!-- Links -->
+          <div class="grid grid-cols-2 gap-8">
+            <div>
+              <h3 class="text-white font-bold mb-4">Liens utiles</h3>
+              <ul class="space-y-2">
+                <li>
+                  <a href="#" class="hover:text-orange-300 transition"
+                    >Accueil</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-orange-300 transition"
+                    >Annonces</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-orange-300 transition"
+                    >Déposer une annonce</a
+                  >
+                </li>
+                <li>
+                  <a href="#" class="hover:text-orange-300 transition">FAQ</a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 class="text-white font-bold mb-4">Contact</h3>
+              <ul class="space-y-2">
+                <li>
+                  <i class="fas fa-envelope mr-2"></i> contact@logetude.fr
+                </li>
+                <li><i class="fas fa-phone mr-2"></i> 01 23 45 67 89</li>
+                <li>
+                  <i class="fas fa-map-marker-alt mr-2"></i> 12 rue des Campus,
+                  Paris
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="border-gray-700 my-8" />
+
+        <!-- Copyright -->
+        <div class="text-center text-sm">
+          <p>&copy; 2023 LogÉtude - Tous droits réservés</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      // Mobile menu toggle
+      document
+        .getElementById("mobileMenuButton")
+        .addEventListener("click", function () {
+          const menu = document.getElementById("mobileMenu");
+          menu.classList.toggle("hidden");
+        });
+
+      // Drag and drop for photos
+      const dropzone = document.getElementById("dropzone");
+      const fileInput = document.getElementById("fileInput");
+      const previewContainer = document.getElementById("previewContainer");
+
+      ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+        dropzone.addEventListener(eventName, preventDefaults, false);
+      });
+
+      function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      ["dragenter", "dragover"].forEach((eventName) => {
+        dropzone.addEventListener(eventName, highlight, false);
+      });
+
+      ["dragleave", "drop"].forEach((eventName) => {
+        dropzone.addEventListener(eventName, unhighlight, false);
+      });
+
+      function highlight() {
+        dropzone.classList.add("active");
+      }
+
+      function unhighlight() {
+        dropzone.classList.remove("active");
+      }
+
+      dropzone.addEventListener("drop", handleDrop, false);
+      fileInput.addEventListener("change", handleFiles, false);
+
+      function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        handleFiles({ target: { files } });
+      }
+
+      function handleFiles(e) {
+        const files = e.target.files;
+
+        // Clear previous previews if needed
+        // previewContainer.innerHTML = '';
+
+        for (let i = 0; i < Math.min(files.length, 10); i++) {
+          const file = files[i];
+          if (!file.type.startsWith("image/")) continue;
+
+          const reader = new FileReader();
+          reader.onload = function (event) {
+            const preview = document.createElement("div");
+            preview.className = "relative";
+            preview.innerHTML = `
+                        <img src="${event.target.result}" alt="Preview" class="h-32 w-full object-cover rounded-lg">
+                        <button class="absolute top-1 right-1 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center" onclick="this.parentElement.remove()">
+                            <i class="fas fa-times text-xs"></i>
+                        </button>
+                    `;
+            previewContainer.appendChild(preview);
+          };
+          reader.readAsDataURL(file);
+        }
+      }
+
+      // Simple form validation feedback
+    </script>
+  </body>
+</html>
