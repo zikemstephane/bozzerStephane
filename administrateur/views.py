@@ -27,6 +27,5 @@ def formulaireAuthentification(request):
             return render(request, 'Authentification.html')
     return render(request, 'Dashbord.html')
 
-#def dashboard(request):
-#    username = request.session.get('admin_username', 'Administrateur')
-#    return render(request, 'Dashbord.html', {'username': username})
+def deconnection(request):
+    return render(request, 'Authentification.html')

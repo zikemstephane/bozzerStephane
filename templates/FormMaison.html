@@ -1,43 +1,126 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{%static 'css/FormMaison.css'%}">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ajouter une maison</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <style>
+    body {
+      background-color: #f5f5f5;
+    }
+
+    .form-container {
+      max-width: 600px;
+      margin: 60px auto;
+      padding: 30px;
+      background-color: white;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-title {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .btn-animated {
+      transition: all 0.3s ease;
+    }
+
+    .btn-animated:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-animated:active {
+      transform: scale(0.97);
+    }
+  </style>
 </head>
 <body>
 
-    <div class="form-container">
-      <h2>Ajouter une maison</h2>
-      <form action="{% url 'enregistrerMaison' %}"  method="post">
-        {% csrf_token %}
-        <label for="adresse">Adresse</label>
-        <input type="text" id="adresse" name="adresse" required>
-  
-        <label for="superficie">Superficie (m²)</label>
-        <input type="number" id="superficie" name="superficie" required>
-  
-        <label for="categorie">Catégorie</label>
-        <select id="categorie" name="categorie" required>
-          <option value="">-- Sélectionner une categorie--</option>
-            {% for categorie in categories %}
-                <option value="{{ categorie.Type_maison }}">{{ categorie.Type_maison }}</option>
-            {% endfor %}
-        </select>
-        <label for="categorie">Quartier</label>
-        <select name="quartier" id="">
-            <option value="" disabled selected>-- Sélectionner un quartier --</option>
-                {% for quartier in quartiers %}
-                    <option value="{{ quartier.nom }}">{{ quartier.nom }}</option>
-                {% endfor %}
-        </select>
-  
-        <button type="submit">Enregistrer</button>
-      </form>
-      <button><a href="{%url 'retour'%}">retour</a></button>
+<div class="form-container">
+  <h2 class="form-title">Ajouter une maison</h2>
+  <form action="{% url 'enregistrerMaison' %}" method="post">
+    {% csrf_token %}
+
+    <div class="mb-3">
+      <label for="adresse" class="form-label">Adresse</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-geo-alt-fill"></i></span>
+        <input type="text" class="form-control" id="adresse" name="adresse" required />
+      </div>
     </div>
-  
-  </body>
+
+    <div class="mb-3">
+      <label for="superficie" class="form-label">Superficie (m²)</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-rulers"></i></span>
+        <input type="number" class="form-control" id="superficie" name="superficie" required />
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="categorie" class="form-label">Catégorie</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-ui-checks-grid"></i></span>
+        <select class="form-select" id="categorie" name="categorie" required>
+          <option value="">-- Sélectionner une catégorie --</option>
+          {% for categorie in categories %}
+          <option value="{{ categorie.Type_maison }}">{{ categorie.Type_maison }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="quartier" class="form-label">Quartier</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-building"></i></span>
+        <select class="form-select" name="quartier" id="quartier" required>
+          <option value="" disabled selected>-- Sélectionner un quartier --</option>
+          {% for quartier in quartiers %}
+          <option value="{{ quartier.nom }}">{{ quartier.nom }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-primary btn-animated">
+        <i class="bi bi-save"></i> Enregistrer
+      </button>
+      <a href="{% url 'retour' %}" class="btn btn-secondary btn-animated">
+        <i class="bi bi-arrow-left-circle"></i> Retour
+      </a>
+    </div>
+  </form>
+
+  {% for message in messages %}
+  <div class="alert alert-info mt-3">{{ message }}</div>
+  {% endfor %}
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

@@ -1,29 +1,93 @@
-{%load static%}
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{%static 'css/FormCategorie.css'%}">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Créer Catégorie</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      background: #f8f9fa;
+    }
+
+    .categorie-form-container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .form-title {
+      text-align: center;
+      margin-bottom: 30px;
+      font-weight: bold;
+      color: #343a40;
+    }
+
+    .btn-group {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button[type="submit"]:hover {
+      transform: scale(1.03);
+      box-shadow: 0 6px 12px rgba(0, 123, 255, 0.2);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
 </head>
 <body>
-    <main class="categorie-form-container">
-        <h1 class="form-title">Créer une Nouvelle Catégorie</h1>
-        <form class="form" method="post" action="{% url 'enregistreCategorie' %}" >
-            {% csrf_token %}
-          <label for="nom">Nom de la Catégorie</label>
-          <input type="text" id="nom" name="nom" ngModel="categorie.nom" required>
-      
-          <label for="description">Description</label>
-          <textarea id="description" name="description" rows="4" ngModel="categorie.description" required></textarea>
-      
-          <button type="submit">Enregistrer</button>
-        </form>
-      
-        <div class="btn-group">
-          <button><a href="{%url 'Dashbord'%}">Retour</a></button>
-        </div>
-      </main>
-    </body>
+
+  <main class="categorie-form-container">
+    <h1 class="form-title">Créer une Nouvelle Catégorie</h1>
+
+    <form method="post" action="{% url 'enregistreCategorie' %}">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="nom" class="form-label">
+          <i class="fa-solid fa-tag me-2"></i>Nom de la Catégorie
+        </label>
+        <input type="text" class="form-control" id="nom" name="nom" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">
+          <i class="fa-solid fa-align-left me-2"></i>Description
+        </label>
+        <textarea class="form-control" id="description" name="description" rows="4" required></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        <i class="fa-solid fa-check me-2"></i>Enregistrer
+      </button>
+    </form>
+
+    <div class="btn-group mt-3">
+      <a href="{% url 'Dashbord' %}" class="btn btn-secondary">
+        <i class="fa-solid fa-arrow-left me-2"></i>Retour
+      </a>
+    </div>
+
+    {% for message in messages %}
+      <div class="alert alert-info mt-3">{{ message }}</div>
+    {% endfor %}
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

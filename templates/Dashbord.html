@@ -1,5 +1,5 @@
 {%load static%}
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,11 +22,16 @@
           <li>
             <a href="{%url 'formCategorie'%}"><i class="icon">🔲</i> Créer Catégorie</a>
           </li>
+          <li>
+            <a href="{% url 'deconnection' %}">
+              <i class="icon">🚪</i> Déconnexion
+            </a>
+          </li>
         </ul>
       </aside>
   
       <main class="main-content">
-        <h1 class="title" style="text-transform: uppercase;">TABLEAU DE BORD DE GESTION DES QUARTIERS DE Mr {{username}}</h1>
+        <h1 class="title" style="text-transform: uppercase;">Consulter votre TABLEAU DE BORD DE GESTION DES QUARTIERS Mr {{username}}</h1>
   
         <div class="cards">
           <div class="card">
@@ -71,4 +76,298 @@
     </div>
   </body>
   
+</html>-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-light: #6366f1;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f1f5f9;
+        }
+        
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        
+        .menu li {
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .menu li.active::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: var(--primary);
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-icon {
+            font-size: 2rem;
+        }
+        
+        .card-icon.location {
+            color: #3b82f6;
+        }
+        
+        .card-icon.house {
+            color: #10b981;
+        }
+        
+        .card-icon.people {
+            color: #f59e0b;
+        }
+        
+        .card-icon.category {
+            color: #8b5cf6;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-light);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex">
+    <!-- Sidebar -->
+    <aside class="sidebar w-64 min-h-screen bg-white shadow-lg fixed">
+        <div class="p-6">
+            <h2 class="text-2xl font-bold text-indigo-600 flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                </svg>
+                Tableau de bord
+            </h2>
+        </div>
+        <nav class="mt-6">
+            <ul class="menu space-y-2 px-6">
+                <li class="active py-3 px-4 rounded-lg bg-indigo-50 text-indigo-600 font-medium flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                    Tableau de bord
+                </li>
+                <li class="py-3 px-4 rounded-lg text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200 flex items-center">
+                    <a href="{% url 'formQuartier' %}" class="flex items-center w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                        Créer Quartier
+                    </a>
+                </li>
+                <li class="py-3 px-4 rounded-lg text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200 flex items-center">
+                    <a href="{% url 'formMaison' %}" class="flex items-center w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        Créer Maison
+                    </a>
+                </li>
+                <li class="py-3 px-4 rounded-lg text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200 flex items-center">
+                    <a href="{%url 'formCategorie'%}" class="flex items-center w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                        Créer Catégorie
+                    </a>
+                </li>
+                <li class="py-3 px-4 rounded-lg text-gray-600 hover:bg-indigo-50 hover:text-indigo-600 transition-colors duration-200 flex items-center mt-8">
+                    <a href="{% url 'deconnection' %}" class="flex items-center w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                        </svg>
+                        Déconnexion
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content flex-1 ml-64 p-8">
+        <div class="mb-8">
+            <h1 class="title text-3xl font-bold text-gray-800" style="text-transform: uppercase;">
+                Consulter votre TABLEAU DE BORD DE GESTION DES QUARTIERS Mr {{username}}
+            </h1>
+            <p class="text-gray-500 mt-2">Bienvenue sur votre espace d'administration</p>
+        </div>
+
+        <!-- Cards -->
+        <div class="cards grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Quartiers Card -->
+            <div class="card bg-white rounded-xl p-6 flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="card-icon location bg-blue-100 p-3 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <h2 class="text-3xl font-bold text-gray-800">{{quartiers}}</h2>
+                    <p class="text-gray-500">Quartiers</p>
+                </div>
+                <div class="mt-6">
+                    <a href="{% url 'listerQuartier'%}" class="btn-primary text-white px-4 py-2 rounded-lg inline-flex items-center">
+                        Voir plus
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Maisons Card -->
+            <div class="card bg-white rounded-xl p-6 flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="card-icon house bg-green-100 p-3 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <h2 class="text-3xl font-bold text-gray-800">{{kwatt}}</h2>
+                    <p class="text-gray-500">Maisons</p>
+                </div>
+                <div class="mt-6">
+                    <a href="{%url 'listerMaison'%}" class="btn-primary text-white px-4 py-2 rounded-lg inline-flex items-center">
+                        Voir plus
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Population Card -->
+            <div class="card bg-white rounded-xl p-6 flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="card-icon people bg-amber-100 p-3 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <h2 class="text-3xl font-bold text-gray-800">8,250</h2>
+                    <p class="text-gray-500">Population</p>
+                </div>
+            </div>
+
+            <!-- Catégories Card -->
+            <div class="card bg-white rounded-xl p-6 flex flex-col">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="card-icon category bg-purple-100 p-3 rounded-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="card-info">
+                    <h2 class="text-3xl font-bold text-gray-800">{{categories}}</h2>
+                    <p class="text-gray-500">Catégories</p>
+                </div>
+                <div class="mt-6">
+                    <a href="{%url 'listerCategorie'%}" class="btn-primary text-white px-4 py-2 rounded-lg inline-flex items-center">
+                        Voir plus
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div class="bg-white rounded-xl p-6 shadow-sm">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-gray-800">Activité récente</h2>
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-start">
+                    <div class="bg-indigo-100 p-2 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">Nouveau quartier ajouté</p>
+                        <p class="text-sm text-gray-500">Il y a 2 heures</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-green-100 p-2 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">3 nouvelles maisons enregistrées</p>
+                        <p class="text-sm text-gray-500">Aujourd'hui, 10:45</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-blue-100 p-2 rounded-full mr-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <div>
+                        <p class="font-medium text-gray-800">Statistiques mises à jour</p>
+                        <p class="text-sm text-gray-500">Hier, 18:30</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Simple script to handle active menu items
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuItems = document.querySelectorAll('.menu li');
+            
+            menuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    menuItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
 </html>

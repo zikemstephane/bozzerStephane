@@ -29,7 +29,7 @@ def enregistreCategorie(request):
             messages.success(request, "Catégorie ajoutée avec succès !")
         except Exception as e:
             messages.error(request, f"Erreur lors de l'ajout de la catégorie : {e}")
-    return render(request, 'FormCategorie.html')
+    return render(request, 'FormCategorie.html',{'message': messages.get_messages(request)})
 
 def listerCategorie(request):
     username = request.session.get('admin_username', None)

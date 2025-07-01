@@ -9,11 +9,11 @@
     <h2>Modifier la catégorie</h2>
     <form method="post">
         {% csrf_token %}
-        <label for="nom">Nom :</label>
-        <input type="text" name="nom" value="{{ categorie.Type_maison }}" required>
+        <label for="nom">Nom de la Catégorie:</label>
+        <input type="text" name="nom" id="nom" value="{{ categorie.Type_maison }}" required>
 
         <label for="description">Description :</label>
-        <textarea name="description" required>{{ categorie.description }}</textarea>
+        <textarea id="description" name="description" required>{{ categorie.description }}</textarea>
 
         <button type="submit">Modifier</button>
         <a href="{% url 'listerCategorie' %}">Annuler</a>

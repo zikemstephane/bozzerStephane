@@ -1,48 +1,48 @@
-{%load static%}
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{%static 'css/authentification.css'%}" />
-    <title>Document</title>
-  </head>
-  <body>
-    <div class="login-container">
-      <h2>Connectez-vous à votre compte</h2>
-      <form method="post" action="formulaireAuthentification/">
-        {% csrf_token %}
-        <div class="mb-3 text-start">
-          <label for="username" class="form-label">Nom d'utilisateur</label>
-          <input
-            type="text"
-            class="form-control"
-            name="username"
-            name="username"
-            required
-            minlength="4"
-            maxlength="20"
-          />
-        </div>
-        <div class="mb-3 text-start">
-          <label for="password" class="form-label">Mot de passe</label>
-          <input
-            type="password"
-            class="form-control"
-            name="password"
-            name="password"
-            required
-            minlength="4"
-            maxlength="20"
-          />
-        </div>
-        <button type="submit" class="btn btn-primary w-100">
-          Se connecter
-        </button>
-      </form>
-      {% if message %}
-      <p style="color: red">{{ message }}</p>
-      {% endif %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
+
+    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full space-y-6">
+        <h2 class="text-3xl font-bold text-center text-gray-800">Connexion</h2>
+
+        <form method="post" action="formulaireAuthentification/" class="space-y-5">
+            {% csrf_token %}
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700">Nom d'utilisateur</label>
+                <input type="text" name="username" id="username" required
+                       class="form-control mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+            </div>
+
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                <div class="relative mt-1">
+                    <input type="password" name="password" id="password" required
+                           class="form-control w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                    <button type="button" onclick="togglePassword()"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-sm text-gray-500">
+                        👁️
+                    </button>
+                </div>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-lg transition duration-200">
+                Se connecter
+            </button>
+        </form>
     </div>
-  </body>
+
+    <script>
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+        }
+    </script>
+
+</body>
 </html>

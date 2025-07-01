@@ -19,10 +19,11 @@ def quartier(request):
             messages.success(request, "Quartier ajouté avec succès !")
         except Exception as e:
             messages.error(request, f"Erreur lors de l'ajout du quartier : {e}")
-    return render(request, 'FormQuartier.html')
+    return render(request, 'FormQuartier.html',{'message': messages.get_messages(request)})
 
 def formQuartier(request):
-    return render(request, 'formQuartier.html')
+    username = request.session.get('admin_username', None)
+    return render(request, 'formQuartier.html',{'username':username})
 
 def Dashbord(request):
     username = request.session.get('admin_username', None)
@@ -38,7 +39,12 @@ def listerQuartier(request):
     username = request.session.get('admin_username', None)
     id_admin = Administrateur.objects.get(username=username).id
     quartiers = Quartier.objects.filter(Administrateur_id=id_admin).all()
-    return render(request, 'quartier.html', {'quartiers': quartiers, 'username': username})
+    quart = Quartier.objects.filter(Administrateur_id=id_admin).all().count()
+    if(quart==0):
+        messages.success(request, "Vous n'avez aucune maison pour le momemt.")
+        return render(request, 'quartier.html', {'quartiers': quartiers, 'username': username,'message': messages.get_messages(request)})
+    else:
+        return render(request, 'quartier.html', {'quartiers': quartiers, 'username': username})
 
 def supprimerQuartier(request, id):
     quartier = get_object_or_404(Quartier, id=id)
