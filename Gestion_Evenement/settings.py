@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure-e35uixu_7k@+2i&mo+!93ab1l%!4--^c($&)65jwr$q+tei998
 DEBUG = True
 
 #ALLOWED_HOSTS = ['GestionEvenement.com', 'www.GestionEvenement.com']
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','gestion-evenement.onrender.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','bozzerstephane-4.onrender.com']
 
 
 
@@ -102,6 +102,7 @@ DATABASES = {
         conn_health_checks=True
     )
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
