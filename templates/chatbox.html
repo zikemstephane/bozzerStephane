@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- templates/chatbox.html -->
+<h2>Chat avec {{ destinataire.username }}</h2>
+
+<div style="border: 1px solid #ccc; padding: 10px; max-height: 400px; overflow-y: scroll;">
+    {% for message in messages %}
+        <p><strong>{{ message.expediteur.username }}:</strong> {{ message.contenu }} <br>
+        <small>{{ message.date_envoi|date:"d/m/Y H:i" }}</small></p>
+        <hr>
+    {% endfor %}
+</div>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Envoyer</button>
+</form>
+
+</body>
+</html>

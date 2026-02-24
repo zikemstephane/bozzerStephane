@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
-
+import dj_database_url
 from dotenv import load_dotenv
 import os
 
@@ -29,7 +29,9 @@ SECRET_KEY = 'django-insecure-e35uixu_7k@+2i&mo+!93ab1l%!4--^c($&)65jwr$q+tei998
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['GestionEvenement.com', 'www.GestionEvenement.com']
+#ALLOWED_HOSTS = ['GestionEvenement.com', 'www.GestionEvenement.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','gestion-evenement.onrender.com']
+
 
 
 # Application definition
@@ -44,6 +46,7 @@ INSTALLED_APPS = [
     'administrateur',
     'evenement',
     'participation',
+    'chatbox',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +94,14 @@ DATABASES = {
         
     }
 }
-
+DATABASES = {
+    'default': dj_database_url.config(
+        # Si l'env var DATABASE_URL n'existe pas (sur votre PC), on utilise SQLite
+        default='sqlite:///db.sqlite3', 
+        conn_max_age=600,
+        conn_health_checks=True
+    )
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators

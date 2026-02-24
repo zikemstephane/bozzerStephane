@@ -23,5 +23,6 @@ urlpatterns = [
     path('',include('evenement.urls')),
     path('',include('participation.urls')),
     path('', Authentification, name='Authentification'),
+    path('', include('chatbox.urls')),
     path('admin/', admin.site.urls),
 ]
